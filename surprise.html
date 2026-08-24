@@ -187,9 +187,10 @@ h1 {
 /* RAKHI */
 
 .rakhi-piece {
-    position: absolute;left: calc(50% + 210px);
-top: 50%;
-transform: translate(-50%, -50%);
+    position: absolute;
+    left: 85%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 
     width: 96px;
     height: 96px;
@@ -443,21 +444,72 @@ transform: translate(-50%, -50%);
 
 @media (max-width: 600px) {
 
-    .wrist {
-        width: 290px;
+    .screen {
+        min-height: calc(100vh - 70px);
+        padding: 30px 15px;
     }
 
-    .thread {
-        width: 260px;
+    h1 {
+        font-size: clamp(38px, 12vw, 55px);
+    }
+
+    .subtitle {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .rakhi-area {
+        width: 100%;
+        height: 320px;
+        margin: 20px auto;
+    }
+
+    .wrist {
+        width: 285px;
+        height: 90px;
     }
 
     .rakhi-piece {
-        left: 85%;
+        width: 82px;
+        height: 82px;
+        left: 88%;
         top: 50%;
+    }
+
+    .rakhi-center {
+        font-size: 32px;
+    }
+
+    .rakhi-jewel {
+        width: 13px;
+        height: 13px;
+    }
+
+    .rakhi-piece::before,
+    .rakhi-piece::after {
+        width: 60px;
+    }
+
+    .rakhi-piece::before {
+        right: 70px;
+    }
+
+    .rakhi-piece::after {
+        left: 70px;
     }
 
     .letter {
         padding: 25px;
+    }
+
+    .main-button {
+        width: 100%;
+        max-width: 330px;
+    }
+
+    .hold-button {
+        width: 100%;
+        max-width: 300px;
     }
 
 }
@@ -561,9 +613,9 @@ transform: translate(-50%, -50%);
             id="rakhiSuccess"
         >
 
-            <div class="success-symbol">
-                🪔
-            </div>
+        <div class="success-symbol">
+    🕉️
+</div>
 
             <h2>
                 Rakhi tied! ❤️
@@ -749,6 +801,8 @@ const wrist =
     document.querySelector(".wrist");
 
 let dragging = false;
+let originalX = null;
+let originalY = null;
 
 
 rakhi.addEventListener(
@@ -756,6 +810,9 @@ rakhi.addEventListener(
     function(event) {
 
         dragging = true;
+
+        originalX = rakhi.offsetLeft;
+        originalY = rakhi.offsetTop;
 
         rakhi.setPointerCapture(event.pointerId);
 

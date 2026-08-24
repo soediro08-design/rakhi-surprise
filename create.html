@@ -474,20 +474,43 @@ async function createSurprise() {
     };
 
 
-    const { data, error } = await bandhanSupabase
+    const { error } = await bandhanSupabase
     .from("surprises")
     .insert([surpriseData]);
 
-console.log("INSERT RESULT:", { data, error });
-
 if (error) {
-    console.error("SUPABASE ERROR:", error);
+    console.error(error);
     alert("Something went wrong saving your surprise 😭");
     return;
 }
 
-alert("SURPRISE SAVED 🎉");
 
+// Find the surprise we just created
+const { data: savedSurprise, error: findError } =
+    await bandhanSupabase
+        .from("surprises")
+        .select("id")
+        .eq("recipient", recipient)
+        .eq("creator", creator)
+        .order("created_at", { ascending: false })
+        .limit(1)
+        .single();
+
+
+if (findError) {
+    console.error(findError);
+    alert("Your surprise was saved, but we couldn't find it 😭");
+    return;
+}
+
+
+localStorage.setItem(
+    "bandhanSurpriseId",
+    savedSurprise.id
+);
+
+
+window.location.href = "memories.html";
 window.location.href = "memories.html";
 
     if (error) {

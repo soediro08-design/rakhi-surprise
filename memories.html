@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Make It Yours | Bandhan 🪔</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8ef;
+    color: #54251f;
+    min-height: 100vh;
+}
+
+/* BACKGROUND */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    background-image:
+        radial-gradient(circle at 20% 20%, #d99a55 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #b63b32 1px, transparent 1px);
+    background-size: 45px 45px;
+    z-index: -1;
+}
+
+/* NAV */
+
+nav {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #9f2d28;
+}
+
+.logo span {
+    color: #d49342;
+}
+
+.back {
+    text-decoration: none;
+    color: #9f2d28;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+/* PROGRESS */
+
+.progress {
+    width: 90%;
+    max-width: 720px;
+    margin: 10px auto 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    color: #c8a995;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.step.active {
+    color: #9f2d28;
+}
+
+.circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ead5bd;
+    margin-right: 7px;
+}
+
+.step.active .circle {
+    background: #9f2d28;
+    color: white;
+}
+
+.line {
+    width: 55px;
+    height: 1px;
+    background: #dfc4a5;
+    margin: 0 12px;
+}
+
+/* MAIN */
+
+.container {
+    width: 90%;
+    max-width: 720px;
+    margin: 0 auto 100px;
+}
+
+.small-text {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12px;
+    color: #b36b31;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #8f2925;
+    font-size: clamp(42px, 7vw, 65px);
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #76504a;
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 45px;
+}
+
+/* CARD */
+
+.form-card {
+    background: rgba(255,255,255,0.82);
+    border: 1px solid #ead5bd;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(100,50,20,0.08);
+}
+
+.form-group {
+    margin-bottom: 30px;
+}
+
+label {
+    display: block;
+    font-weight: 700;
+    color: #8f2925;
+    margin-bottom: 9px;
+}
+
+.hint {
+    font-size: 13px;
+    color: #9b746d;
+    margin-bottom: 10px;
+}
+
+input,
+textarea {
+    width: 100%;
+    border: 1px solid #dfc4a5;
+    background: #fffaf4;
+    padding: 15px 17px;
+    border-radius: 14px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    color: #54251f;
+    outline: none;
+    transition: 0.25s;
+}
+
+input:focus,
+textarea:focus {
+    border-color: #9f2d28;
+    box-shadow: 0 0 0 3px rgba(159,45,40,0.08);
+}
+
+textarea {
+    min-height: 130px;
+    resize: vertical;
+}
+
+/* MEMORY BOXES */
+
+.memory-box {
+    background: #fffaf4;
+    border: 1px solid #dfc4a5;
+    border-radius: 18px;
+    padding: 20px;
+    margin-bottom: 14px;
+}
+
+.memory-box label {
+    font-size: 15px;
+}
+
+/* PHOTO */
+
+.photo-area {
+    border: 2px dashed #dfc4a5;
+    border-radius: 18px;
+    padding: 28px;
+    text-align: center;
+    background: #fffaf4;
+}
+
+.photo-icon {
+    font-size: 35px;
+    margin-bottom: 10px;
+}
+
+.photo-area p {
+    font-size: 14px;
+    color: #9b746d;
+    margin-bottom: 15px;
+}
+
+.photo-button {
+    display: inline-block;
+    background: #fff1d3;
+    color: #8f2925;
+    padding: 11px 18px;
+    border-radius: 25px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.photo-button:hover {
+    background: #f7dfb4;
+}
+
+#photoInput {
+    display: none;
+}
+
+#photoPreview {
+    max-width: 100%;
+    max-height: 260px;
+    border-radius: 15px;
+    margin-top: 15px;
+    display: none;
+}
+
+/* BUTTON */
+
+.continue-button {
+    width: 100%;
+    border: none;
+    background: #9f2d28;
+    color: white;
+    padding: 17px;
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(159,45,40,0.2);
+}
+
+.continue-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(159,45,40,0.3);
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+<!-- NAV -->
+
+<nav>
+
+    <div class="logo">
+        Bandhan<span>🪔</span>
+    </div>
+
+    <a href="create.html" class="back">
+        ← Back
+    </a>
+
+</nav>
+
+
+<!-- PROGRESS -->
+
+<div class="progress">
+
+    <div class="step active">
+        <div class="circle">1</div>
+        Details
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        <div class="circle">2</div>
+        Memories
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        <div class="circle">3</div>
+        Message
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        <div class="circle">4</div>
+        Preview
+    </div>
+
+</div>
+
+
+<!-- MAIN -->
+
+<main class="container">
+
+    <div class="small-text">
+        Make it personal
+    </div>
+
+    <h1>
+        Add some<br>memories. 💕
+    </h1>
+
+    <p class="subtitle">
+        The little things are what make your bond special.
+        Add a few memories that belong to just the two of you.
+    </p>
+
+
+    <div class="form-card">
+
+
+        <!-- FAVORITE MEMORY -->
+
+        <div class="memory-box">
+
+            <label for="memory">
+                💭 A favorite memory
+            </label>
+
+            <div class="hint">
+                Something you'll always remember.
+            </div>
+
+            <textarea
+                id="memory"
+                placeholder="That time we..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- INSIDE JOKE -->
+
+        <div class="memory-box">
+
+            <label for="inside">
+                😂 Something only you two understand
+            </label>
+
+            <div class="hint">
+                An inside joke, funny moment, or little tradition.
+            </div>
+
+            <textarea
+                id="inside"
+                placeholder="Only we would understand..."
+            ></textarea>
+
+        </div>
+
+
+        <!-- NICKNAME -->
+
+        <div class="memory-box">
+
+            <label for="nickname">
+                🥰 A nickname for them
+            </label>
+
+            <div class="hint">
+                What do you usually call them?
+            </div>
+
+            <input
+                type="text"
+                id="nickname"
+                placeholder="e.g. Shivu"
+            >
+
+        </div>
+
+
+        <!-- PHOTO -->
+
+        <div class="form-group">
+
+            <label>
+                📸 Add a memory
+            </label>
+
+            <div class="hint">
+                You can add a photo of a special moment.
+            </div>
+
+            <div class="photo-area">
+
+                <div class="photo-icon">
+                    📷
+                </div>
+
+                <p>
+                    Choose a photo from your device
+                </p>
+
+                <label for="photoInput" class="photo-button">
+                    Choose photo
+                </label>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*"
+                >
+
+                <img id="photoPreview">
+
+            </div>
+
+        </div>
+
+
+        <!-- CONTINUE -->
+
+        <button
+            class="continue-button"
+            onclick="saveMemories()"
+        >
+            Continue ✨
+        </button>
+
+
+    </div>
+
+</main>
+
+
+<script>
+
+const photoInput =
+    document.getElementById("photoInput");
+
+const photoPreview =
+    document.getElementById("photoPreview");
+
+
+photoInput.addEventListener("change", function() {
+
+    const file = this.files[0];
+
+    if (file) {
+
+        const reader = new FileReader();
+
+        reader.onload = function(event) {
+
+            photoPreview.src = event.target.result;
+
+            photoPreview.style.display = "block";
+
+        };
+
+        reader.readAsDataURL(file);
+
+    }
+
+});
+
+
+function saveMemories() {
+
+    const memory =
+        document.getElementById("memory").value.trim();
+
+    const inside =
+        document.getElementById("inside").value.trim();
+
+    const nickname =
+        document.getElementById("nickname").value.trim();
+
+
+    const existingData =
+        JSON.parse(
+            localStorage.getItem("bandhanSurprise")
+        ) || {};
+
+
+    const updatedData = {
+
+        ...existingData,
+
+        memory: memory,
+
+        inside: inside,
+
+        nickname: nickname
+
+    };
+
+
+    localStorage.setItem(
+        "bandhanSurprise",
+        JSON.stringify(updatedData)
+    );
+
+
+    window.location.href = "message.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

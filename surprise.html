@@ -518,7 +518,26 @@ h1 {
     margin: 30px auto;
     max-width: 650px;
 }
+.memory-preview {
+    background: #fffaf4;
+    border: 1px solid #ead5bd;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: left;
+    margin: 15px auto;
+    max-width: 650px;
+}
 
+.memory-title {
+    color: #8f2925;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.memory-text {
+    color: #76504a;
+    line-height: 1.6;
+}
 
 /* FINAL */
 
@@ -811,7 +830,40 @@ h1 {
             id="letter"
         >
         </div>
+<div class="memory-preview" id="memoryBox">
 
+    <div class="memory-title">
+        💭 A favorite memory
+    </div>
+
+    <div class="memory-text" id="memoryPreview">
+    </div>
+
+</div>
+
+
+<div class="memory-preview" id="insideBox">
+
+    <div class="memory-title">
+        😂 Your little inside joke
+    </div>
+
+    <div class="memory-text" id="insidePreview">
+    </div>
+
+</div>
+
+
+<div class="memory-preview" id="nicknameBox">
+
+    <div class="memory-title">
+        🥰 Their nickname
+    </div>
+
+    <div class="memory-text" id="nicknamePreview">
+    </div>
+
+</div>
         <button
             class="main-button"
             onclick="showScreen('final')"
@@ -933,7 +985,52 @@ async function loadSurprise() {
     document.getElementById("letter").innerText =
         data.message ||
         "Happy Raksha Bandhan! ❤️";
+// 💭 OPTIONAL MEMORIES
 
+const memoryBox =
+    document.getElementById("memoryBox");
+
+const insideBox =
+    document.getElementById("insideBox");
+
+const nicknameBox =
+    document.getElementById("nicknameBox");
+
+
+if (data.memory) {
+
+    document.getElementById("memoryPreview").innerText =
+        data.memory;
+
+} else {
+
+    memoryBox.style.display = "none";
+
+}
+
+
+if (data.inside) {
+
+    document.getElementById("insidePreview").innerText =
+        data.inside;
+
+} else {
+
+    insideBox.style.display = "none";
+
+}
+
+
+if (data.nickname) {
+
+    document.getElementById("nicknamePreview").innerText =
+        data.nickname;
+
+} else {
+
+    nicknameBox.style.display = "none";
+
+}
 
     document.getElementById("finalMessage").innerText =
         "Made with love by " +

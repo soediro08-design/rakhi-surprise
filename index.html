@@ -1,354 +1,548 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rakhi Surprise 🪔</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
+<title>Bandhan 🪔 | A little surprise for someone special</title>
 
-        body {
-            margin: 0;
-            font-family: Georgia, serif;
-            background: #fff7ed;
-            color: #54251f;
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-        }
+<style>
 
-        .container {
-            width: 90%;
-            max-width: 650px;
-            padding: 50px 25px;
-        }
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
 
-        .emoji {
-            font-size: 55px;
-            margin-bottom: 15px;
-        }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
 
-        h1 {
-            font-size: 48px;
-            margin: 10px 0;
-        }
+html {
+    scroll-behavior: smooth;
+}
 
-        h2 {
-            font-size: 24px;
-            font-weight: normal;
-        }
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8ef;
+    color: #54251f;
+    overflow-x: hidden;
+}
 
-        p {
-            font-family: Arial, sans-serif;
-            font-size: 17px;
-            line-height: 1.7;
-        }
+/* ---------- BACKGROUND ---------- */
 
-        .card {
-            background: white;
-            padding: 35px;
-            border-radius: 25px;
-            box-shadow: 0 10px 35px rgba(84, 37, 31, 0.12);
-            margin-top: 30px;
-        }
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    background-image:
+        radial-gradient(circle at 20% 20%, #d99a55 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #b63b32 1px, transparent 1px);
+    background-size: 45px 45px;
+    z-index: -1;
+}
 
-        button {
-            border: none;
-            background: #b33a2f;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-size: 17px;
-            cursor: pointer;
-            margin-top: 20px;
-            transition: 0.2s;
-        }
+/* ---------- NAVBAR ---------- */
 
-        button:hover {
-            transform: scale(1.05);
-        }
+nav {
+    width: 100%;
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+}
 
-        .hidden {
-            display: none;
-        }
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #9f2d28;
+}
 
-        .envelope {
-            font-size: 75px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+.logo span {
+    color: #d49342;
+}
 
-        .envelope:hover {
-            transform: scale(1.1) rotate(-3deg);
-        }
+.nav-button {
+    text-decoration: none;
+    color: #9f2d28;
+    border: 1px solid #d7a56d;
+    padding: 10px 18px;
+    border-radius: 30px;
+    font-size: 14px;
+    transition: 0.3s;
+}
 
-        .message {
-            background: #fff1dc;
-            padding: 25px;
-            border-radius: 20px;
-            margin-top: 25px;
-            font-size: 18px;
-            line-height: 1.7;
-        }
+.nav-button:hover {
+    background: #9f2d28;
+    color: white;
+}
 
-        .rakhi {
-            font-size: 100px;
-            margin: 20px;
-        }
+/* ---------- HERO ---------- */
 
-        .final {
-            font-size: 20px;
-            line-height: 1.8;
-        }
-    </style>
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+}
+
+.hero-content {
+    max-width: 800px;
+    animation: fadeUp 1s ease;
+}
+
+.small-text {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 13px;
+    color: #b36b31;
+    margin-bottom: 22px;
+    font-weight: 600;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(55px, 9vw, 105px);
+    line-height: 0.95;
+    color: #8f2925;
+    margin-bottom: 25px;
+}
+
+h1 span {
+    color: #c7893e;
+}
+
+.hero p {
+    max-width: 580px;
+    margin: 0 auto 35px;
+    font-size: 18px;
+    line-height: 1.7;
+    color: #76504a;
+}
+
+.primary-button {
+    display: inline-block;
+    background: #9f2d28;
+    color: white;
+    text-decoration: none;
+    padding: 16px 30px;
+    border-radius: 40px;
+    font-weight: 600;
+    box-shadow: 0 10px 25px rgba(159,45,40,0.2);
+    transition: 0.3s;
+}
+
+.primary-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(159,45,40,0.3);
+}
+
+.secondary-button {
+    display: inline-block;
+    margin-left: 10px;
+    color: #9f2d28;
+    text-decoration: none;
+    padding: 15px 25px;
+    border-radius: 40px;
+    font-weight: 600;
+}
+
+/* ---------- DECORATIONS ---------- */
+
+.diya {
+    position: absolute;
+    font-size: 45px;
+    animation: float 4s ease-in-out infinite;
+}
+
+.diya.one {
+    left: 8%;
+    top: 28%;
+}
+
+.diya.two {
+    right: 9%;
+    top: 32%;
+    animation-delay: 1s;
+}
+
+.flower {
+    position: absolute;
+    font-size: 35px;
+    animation: float 5s ease-in-out infinite;
+}
+
+.flower.one {
+    left: 15%;
+    bottom: 17%;
+}
+
+.flower.two {
+    right: 15%;
+    bottom: 13%;
+    animation-delay: 1.5s;
+}
+
+/* ---------- SECTION ---------- */
+
+.section {
+    padding: 100px 7%;
+    text-align: center;
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 45px;
+    color: #8f2925;
+    margin-bottom: 15px;
+}
+
+.section-subtitle {
+    color: #76504a;
+    max-width: 550px;
+    margin: 0 auto 50px;
+    line-height: 1.7;
+}
+
+/* ---------- CARDS ---------- */
+
+.cards {
+    max-width: 1050px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: rgba(255,255,255,0.75);
+    border: 1px solid #ead5bd;
+    padding: 35px 25px;
+    border-radius: 25px;
+    transition: 0.3s;
+    box-shadow: 0 10px 30px rgba(100,50,20,0.05);
+}
+
+.card:hover {
+    transform: translateY(-7px);
+    box-shadow: 0 20px 40px rgba(100,50,20,0.1);
+}
+
+.card-icon {
+    font-size: 40px;
+    margin-bottom: 18px;
+}
+
+.card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #8f2925;
+}
+
+.card p {
+    color: #76504a;
+    line-height: 1.6;
+}
+
+/* ---------- CREATOR SECTION ---------- */
+
+.creator {
+    background: #8f2925;
+    color: white;
+    padding: 100px 20px;
+    text-align: center;
+}
+
+.creator h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    margin-bottom: 18px;
+}
+
+.creator p {
+    max-width: 570px;
+    margin: 0 auto 30px;
+    line-height: 1.7;
+    opacity: 0.9;
+}
+
+.creator-button {
+    display: inline-block;
+    background: #f1c477;
+    color: #67231f;
+    padding: 16px 32px;
+    border-radius: 40px;
+    text-decoration: none;
+    font-weight: 700;
+    transition: 0.3s;
+}
+
+.creator-button:hover {
+    transform: translateY(-3px);
+    background: #fff1d3;
+}
+
+/* ---------- FOOTER ---------- */
+
+footer {
+    padding: 30px;
+    text-align: center;
+    background: #67231f;
+    color: #f9dfbb;
+    font-size: 13px;
+}
+
+/* ---------- ANIMATIONS ---------- */
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(25px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-12px);
+    }
+}
+
+/* ---------- MOBILE ---------- */
+
+@media (max-width: 700px) {
+
+    nav {
+        padding: 18px 5%;
+    }
+
+    .logo {
+        font-size: 23px;
+    }
+
+    .nav-button {
+        padding: 8px 13px;
+        font-size: 12px;
+    }
+
+    .hero {
+        padding-top: 120px;
+    }
+
+    .hero p {
+        font-size: 16px;
+    }
+
+    .secondary-button {
+        display: block;
+        margin: 12px 0 0;
+    }
+
+    .cards {
+        grid-template-columns: 1fr;
+        max-width: 400px;
+    }
+
+    .section-title {
+        font-size: 37px;
+    }
+
+    .creator h2 {
+        font-size: 38px;
+    }
+
+    .diya {
+        font-size: 30px;
+    }
+
+    .flower {
+        font-size: 25px;
+    }
+}
+
+</style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- NAVIGATION -->
 
-    <!-- START SCREEN -->
-    <div id="start">
-        <div class="emoji">🪔</div>
+<nav>
 
-        <h1>Rakhi Surprise</h1>
-
-        <h2>A little surprise for someone special.</h2>
-
-        <div class="card">
-            <p>
-                Someone has prepared a little Raksha Bandhan surprise
-                just for you. ❤️
-            </p>
-
-            <p>
-                But you'll have to open it yourself...
-            </p>
-
-            <button onclick="startSurprise()">
-                Open your surprise 💌
-            </button>
-        </div>
+    <div class="logo">
+        Bandhan<span>🪔</span>
     </div>
 
+    <a href="#create" class="nav-button">
+        Create a surprise
+    </a>
 
-    <!-- OPEN WHEN SCREEN -->
-    <div id="openWhen" class="hidden">
+</nav>
 
-        <div class="emoji">💌</div>
 
-        <h1>Open when...</h1>
+<!-- HERO -->
+
+<section class="hero">
+
+    <div class="diya one">🪔</div>
+    <div class="diya two">🪔</div>
+
+    <div class="flower one">🌸</div>
+    <div class="flower two">🌼</div>
+
+    <div class="hero-content">
+
+        <div class="small-text">
+            A digital Raksha Bandhan experience
+        </div>
+
+        <h1>
+            Celebrate the<br>
+            <span>bond.</span>
+        </h1>
 
         <p>
-            Pick an envelope.
+            Create a little digital surprise for someone who feels
+            like family. Fill it with memories, messages, laughter
+            and a whole lot of love.
         </p>
+
+        <a href="#create" class="primary-button">
+            Create a surprise 💌
+        </a>
+
+        <a href="#how" class="secondary-button">
+            See how it works →
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- HOW IT WORKS -->
+
+<section class="section" id="how">
+
+    <div class="small-text">
+        Made with love
+    </div>
+
+    <h2 class="section-title">
+        A surprise they'll remember.
+    </h2>
+
+    <p class="section-subtitle">
+        Turn your Raksha Bandhan wishes into something more personal
+        than a simple message.
+    </p>
+
+
+    <div class="cards">
 
         <div class="card">
 
-            <div class="envelope" onclick="openMessage('badDay')">
+            <div class="card-icon">
                 💌
-                <p>you're having a bad day</p>
             </div>
 
-            <div class="envelope" onclick="openMessage('laugh')">
-                😂
-                <p>you need to laugh</p>
+            <h3>
+                Write your message
+            </h3>
+
+            <p>
+                Add your own words, memories and little messages
+                for someone special.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📸
             </div>
 
-            <div class="envelope" onclick="openMessage('miss')">
-                🥹
-                <p>you miss me</p>
-            </div>
+            <h3>
+                Add memories
+            </h3>
 
-            <div class="envelope" onclick="openMessage('rakhi')">
+            <p>
+                Turn your favourite moments together into part
+                of the surprise.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
                 🪔
-                <p>it's Raksha Bandhan</p>
             </div>
 
-        </div>
-
-    </div>
-
-
-    <!-- MESSAGE SCREEN -->
-    <div id="messageScreen" class="hidden">
-
-        <div class="emoji">💗</div>
-
-        <h1 id="messageTitle"></h1>
-
-        <div class="message">
-            <p id="messageText"></p>
-        </div>
-
-        <button onclick="backToEnvelopes()">
-            Back to envelopes 💌
-        </button>
-
-        <button onclick="showRakhi()">
-            There's one more thing... 🪔
-        </button>
-
-    </div>
-
-
-    <!-- RAKHI SCREEN -->
-    <div id="rakhiScreen" class="hidden">
-
-        <div class="emoji">🪔</div>
-
-        <h1>One last thing...</h1>
-
-        <p>
-            Every brother deserves a Rakhi.
-        </p>
-
-        <p>
-            So even though I can't physically tie one...
-        </p>
-
-        <button onclick="tieRakhi()">
-            Tie your Rakhi 🧿
-        </button>
-
-    </div>
-
-
-    <!-- FINAL SCREEN -->
-    <div id="finalScreen" class="hidden">
-
-        <div class="emoji">✨</div>
-
-        <h1>Rakhi tied!</h1>
-
-        <div class="rakhi">
-            🧿
-        </div>
-
-        <div class="final">
+            <h3>
+                Share the moment
+            </h3>
 
             <p>
-                Happy Raksha Bandhan! 🪔❤️
-            </p>
-
-            <p>
-                We might not share the same parents,
-                but you're still someone I consider family.
-            </p>
-
-            <p>
-                No matter where life takes us,
-                you'll always be my brother. 🫶
+                Give them a special link and let them discover
+                their surprise.
             </p>
 
         </div>
 
     </div>
 
-</div>
+</section>
 
 
-<script>
+<!-- CREATE -->
 
-function hideAll() {
-    document.getElementById("start").classList.add("hidden");
-    document.getElementById("openWhen").classList.add("hidden");
-    document.getElementById("messageScreen").classList.add("hidden");
-    document.getElementById("rakhiScreen").classList.add("hidden");
-    document.getElementById("finalScreen").classList.add("hidden");
-}
+<section class="creator" id="create">
 
-function startSurprise() {
-    hideAll();
-    document.getElementById("openWhen").classList.remove("hidden");
-}
+    <h2>
+        Ready to make theirs?
+    </h2>
 
-function openMessage(type) {
+    <p>
+        Create something personal, meaningful and a little bit
+        magical this Raksha Bandhan.
+    </p>
 
-    hideAll();
+    <a href="#" class="creator-button">
+        Start creating ✨
+    </a>
 
-    let title = "";
-    let message = "";
+</section>
 
-    if (type === "badDay") {
-        title = "Having a bad day? 🥺";
-        message = "Just remember that somewhere out there is someone who thinks you're pretty awesome. So don't let one bad day convince you otherwise. ❤️";
-    }
 
-    if (type === "laugh") {
-        title = "You need to laugh 😂";
-        message = "Unfortunately I couldn't fit an entire comedy show into this website... so you'll have to laugh at my terrible jokes instead. 😭";
-    }
+<!-- FOOTER -->
 
-    if (type === "miss") {
-        title = "You miss me? 🥹";
-        message = "Well... unfortunately I'm not magically appearing at your door. But consider this your little reminder that I'm always thinking about you. 🫶";
-    }
+<footer>
 
-    if (type === "rakhi") {
-        title = "Happy Raksha Bandhan! 🪔";
-        message = "Today is about celebrating the people who feel like family. And yes, that includes you. ❤️";
-    }
+    Made with 🪔 & love · Bandhan
 
-    document.getElementById("messageTitle").innerText = title;
-    document.getElementById("messageText").innerText = message;
+</footer>
 
-    document.getElementById("messageScreen").classList.remove("hidden");
-}
-
-function backToEnvelopes() {
-    hideAll();
-    document.getElementById("openWhen").classList.remove("hidden");
-}
-
-function showRakhi() {
-    hideAll();
-    document.getElementById("rakhiScreen").classList.remove("hidden");
-}
-
-function tieRakhi() {
-
-    hideAll();
-
-    document.getElementById("finalScreen").classList.remove("hidden");
-
-    createConfetti();
-}
-
-function createConfetti() {
-
-    for (let i = 0; i < 80; i++) {
-
-        const confetti = document.createElement("div");
-
-        confetti.innerHTML = "✨";
-
-        confetti.style.position = "fixed";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-20px";
-        confetti.style.fontSize = (10 + Math.random() * 20) + "px";
-        confetti.style.transition = "transform 3s linear, top 3s linear";
-
-        document.body.appendChild(confetti);
-
-        setTimeout(() => {
-            confetti.style.top = "100vh";
-            confetti.style.transform =
-                "rotate(" + Math.random() * 720 + "deg)";
-        }, 50);
-
-        setTimeout(() => {
-            confetti.remove();
-        }, 3500);
-    }
-}
-
-</script>
 
 </body>
 </html>

@@ -187,7 +187,9 @@ h1 {
 /* RAKHI */
 
 .rakhi-piece {
-    position: absolute;
+    position: absolute;left: calc(50% + 210px);
+top: 50%;
+transform: translate(-50%, -50%);
 
     width: 96px;
     height: 96px;
@@ -225,12 +227,12 @@ h1 {
 }
 
 .rakhi-piece:hover {
-    transform: scale(1.05);
+    transform: translate(-50%, -50%) scale(1.05);
 }
 
 .rakhi-piece:active {
     cursor: grabbing;
-    transform: scale(1.1);
+    transform: translate(-50%, -50%) scale(1.1);
 }
 
 .rakhi-center {
@@ -416,6 +418,11 @@ h1 {
         width: 260px;
     }
 
+    .rakhi-piece {
+        left: 85%;
+        top: 50%;
+    }
+
     .letter {
         padding: 25px;
     }
@@ -506,9 +513,9 @@ h1 {
                 id="rakhiPiece"
             >
 
-                <div class="rakhi-center">
-                    🪔
-                </div>
+<div class="rakhi-center">
+    🕉️
+</div>
 
                 <div class="rakhi-jewel"></div>
 

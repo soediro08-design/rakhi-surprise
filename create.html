@@ -411,7 +411,6 @@ textarea {
 <script>
 
 const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
-
 const SUPABASE_KEY = "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
 
 const bandhanSupabase = window.supabase.createClient(
@@ -474,37 +473,13 @@ async function createSurprise() {
     };
 
 
-   const { data, error } = await bandhanSupabase
-    .from("surprises")
-    .insert([surpriseData])
-    .select("id")
-    .single();
-
-if (error) {
-    console.error(error);
-    alert("Something went wrong saving your surprise 😭");
-    return;
-}
+    const { data, error } = await bandhanSupabase
+        .from("surprises")
+        .insert([surpriseData])
+        .select("id")
+        .single();
 
 
-const { data, error } = await bandhanSupabase
-    .from("surprises")
-    .insert([surpriseData])
-    .select("id")
-    .single();
-
-if (error) {
-    console.error(error);
-    alert("Something went wrong saving your surprise 😭");
-    return;
-}
-
-localStorage.setItem(
-    "bandhanSurpriseId",
-    data.id
-);
-
-window.location.href = "memories.html";
     if (error) {
         console.error(error);
         alert("Something went wrong saving your surprise 😭");
@@ -512,13 +487,16 @@ window.location.href = "memories.html";
     }
 
 
-    localStorage.setItem("bandhanSurpriseId", data.id);
+    localStorage.setItem(
+        "bandhanSurpriseId",
+        data.id
+    );
+
 
     window.location.href = "memories.html";
 }
 
 </script>
-
 </body>
 
 </html>

@@ -474,7 +474,19 @@ textarea {
 </main>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
+
+const bandhanSupabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+const surpriseId = localStorage.getItem("bandhanSurpriseId");
 
 const photoInput =
     document.getElementById("photoInput");
@@ -506,7 +518,7 @@ photoInput.addEventListener("change", function() {
 });
 
 
-function saveMemories() {
+async function saveMemories() {
 
     const memory =
         document.getElementById("memory").value.trim();
@@ -518,29 +530,47 @@ function saveMemories() {
         document.getElementById("nickname").value.trim();
 
 
-    const existingData =
-        JSON.parse(
-            localStorage.getItem("bandhanSurprise")
-        ) || {};
+    if (!surpriseId) {
+        alert("We couldn't find your surprise 😭");
+        return;
+    }
 
 
-    const updatedData = {
-
-        ...existingData,
-
-        memory: memory,
-
-        inside: inside,
-
-        nickname: nickname
-
-    };
+    const { error } = await bandhanSupabase
+        .from("surprises")
+        .update({
+            memory: memory,
+            inside: inside,
+            nickname: nickname
+        })
+        .eq("id", surpriseId);
 
 
-    localStorage.setItem(
-        "bandhanSurprise",
-        JSON.stringify(updatedData)
-    );
+    if (error) {
+        console.error(error);
+        alert("Something went wrong saving your memories 😭");
+        return;
+    }
+
+
+    window.location.href = "message.html";
+
+}
+    const { error } = await bandhanSupabase
+        .from("surprises")
+        .update({
+            memory: memory,
+            inside: inside,
+            nickname: nickname
+        })
+        .eq("id", surpriseId);
+
+
+    if (error) {
+        console.error(error);
+        alert("Something went wrong saving your memories 😭");
+        return;
+    }
 
 
     window.location.href = "message.html";

@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Your Surprise Is Ready | Bandhan 🪔</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8ef;
+    color: #54251f;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+/* BACKGROUND */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+
+    background-image:
+        radial-gradient(circle at 20% 20%, #d99a55 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #b63b32 1px, transparent 1px);
+
+    background-size: 45px 45px;
+    z-index: -1;
+}
+
+/* NAV */
+
+nav {
+    padding: 22px 7%;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #9f2d28;
+}
+
+.logo span {
+    color: #d49342;
+}
+
+/* MAIN */
+
+.container {
+    width: 90%;
+    max-width: 720px;
+    margin: 70px auto;
+    text-align: center;
+}
+
+/* TEXT */
+
+.small-text {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12px;
+    color: #b36b31;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8f2925;
+    font-size: clamp(45px, 8vw, 70px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #76504a;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 40px;
+}
+
+/* CARD */
+
+.ready-card {
+    background: rgba(255,255,255,0.88);
+    border: 1px solid #ead5bd;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(100,50,20,0.08);
+}
+
+/* RAKHI */
+
+.rakhi-icon {
+    font-size: 70px;
+    margin-bottom: 15px;
+}
+
+/* NAME */
+
+.surprise-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    color: #9f2d28;
+    margin-bottom: 25px;
+}
+
+/* LINK BOX */
+
+.link-box {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.link-box input {
+    flex: 1;
+    min-width: 0;
+
+    border: 1px solid #dfc4a5;
+    background: #fffaf4;
+
+    padding: 15px;
+    border-radius: 14px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: #54251f;
+}
+
+.copy-button {
+    border: none;
+    background: #9f2d28;
+    color: white;
+
+    padding: 0 20px;
+
+    border-radius: 14px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 700;
+
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+.copy-button:hover {
+    transform: translateY(-2px);
+}
+
+/* SHARE */
+
+.share-button {
+    width: 100%;
+
+    border: none;
+    background: #d49342;
+    color: white;
+
+    padding: 17px;
+
+    border-radius: 40px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 15px;
+
+    transition: 0.25s;
+}
+
+.share-button:hover {
+    transform: translateY(-3px);
+}
+
+/* PREVIEW */
+
+.preview-button {
+    width: 100%;
+
+    border: 1px solid #9f2d28;
+    background: transparent;
+    color: #9f2d28;
+
+    padding: 15px;
+
+    border-radius: 40px;
+
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    margin-top: 12px;
+}
+
+/* COPIED */
+
+#copied {
+    display: none;
+
+    margin-top: 15px;
+
+    color: #9f2d28;
+
+    font-weight: 700;
+
+    animation: appear 0.3s ease;
+}
+
+@keyframes appear {
+
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+}
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+    .container {
+        margin: 45px auto;
+    }
+
+    .ready-card {
+        padding: 28px 20px;
+    }
+
+    .link-box {
+        flex-direction: column;
+    }
+
+    .copy-button {
+        padding: 15px;
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        Bandhan<span>🪔</span>
+    </div>
+
+</nav>
+
+
+<main class="container">
+
+    <div class="small-text">
+        Almost there ✨
+    </div>
+
+    <div class="rakhi-icon">
+        🪔❤️🧵
+    </div>
+
+    <h1>
+        Your surprise<br>is ready!
+    </h1>
+
+    <p class="subtitle">
+        You've created something special.
+        Now all that's left is to send it to them. 💌
+    </p>
+
+
+    <div class="ready-card">
+
+        <div class="surprise-name" id="surpriseName">
+            A special surprise ❤️
+        </div>
+
+
+        <p class="subtitle">
+            Copy this link and send it to your special person.
+        </p>
+
+
+        <div class="link-box">
+
+            <input
+                type="text"
+                id="surpriseLink"
+                readonly
+            >
+
+            <button
+                class="copy-button"
+                onclick="copyLink()"
+            >
+                Copy 🔗
+            </button>
+
+        </div>
+
+
+        <div id="copied">
+            ✨ Link copied! Now send it to them ❤️
+        </div>
+
+
+        <button
+            class="share-button"
+            onclick="shareSurprise()"
+        >
+            📱 Share surprise
+        </button>
+
+
+        <button
+            class="preview-button"
+            onclick="openSurprise()"
+        >
+            Preview surprise 👀
+        </button>
+
+    </div>
+
+</main>
+
+
+<script>
+
+/* LOAD SURPRISE DATA */
+
+const data =
+    JSON.parse(
+        localStorage.getItem("bandhanSurprise")
+    ) || {};
+
+
+const recipient =
+    data.recipient || "someone special";
+
+
+/* SHOW NAME */
+
+document.getElementById(
+    "surpriseName"
+).innerText =
+    "A surprise for " + recipient + " ❤️";
+
+
+/* CREATE LINK */
+
+const surpriseLink =
+    window.location.origin +
+    window.location.pathname.replace(
+        "ready.html",
+        "surprise.html"
+    );
+
+
+document.getElementById(
+    "surpriseLink"
+).value =
+    surpriseLink;
+
+
+/* COPY LINK */
+
+function copyLink() {
+
+    const input =
+        document.getElementById("surpriseLink");
+
+    navigator.clipboard.writeText(
+        input.value
+    );
+
+    document.getElementById(
+        "copied"
+    ).style.display = "block";
+
+}
+
+
+/* SHARE */
+
+function shareSurprise() {
+
+    const link =
+        document.getElementById("surpriseLink").value;
+
+
+    if (navigator.share) {
+
+        navigator.share({
+
+            title:
+                "A little Rakhi surprise 🪔",
+
+            text:
+                "Someone made you a little surprise ❤️",
+
+            url:
+                link
+
+        });
+
+    } else {
+
+        copyLink();
+
+        alert(
+            "Your link has been copied! Send it to your special person ❤️"
+        );
+
+    }
+
+}
+
+
+/* PREVIEW */
+
+function openSurprise() {
+
+    window.location.href =
+        "surprise.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

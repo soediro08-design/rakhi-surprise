@@ -473,7 +473,6 @@ textarea {
 
 </main>
 
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
@@ -486,27 +485,18 @@ const bandhanSupabase = window.supabase.createClient(
     SUPABASE_KEY
 );
 
-const surpriseId = localStorage.getItem("bandhanSurpriseId");
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<script>
-
-const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
-
-const bandhanSupabase = window.supabase.createClient(
-    SUPABASE_URL,
-    SUPABASE_KEY
-);
-
-const surpriseId = localStorage.getItem("bandhanSurpriseId");
-
-const photoInput = document.getElementById("photoInput");
-const photoPreview = document.getElementById("photoPreview");
+const surpriseId =
+    localStorage.getItem("bandhanSurpriseId");
 
 
-// Show photo preview
+const photoInput =
+    document.getElementById("photoInput");
+
+const photoPreview =
+    document.getElementById("photoPreview");
+
+
+// 📸 Show selected photo
 photoInput.addEventListener("change", function() {
 
     const file = this.files[0];
@@ -523,12 +513,13 @@ photoInput.addEventListener("change", function() {
         };
 
         reader.readAsDataURL(file);
+
     }
 
 });
 
 
-// Save memories
+// 💾 Save memories + optional photo
 async function saveMemories() {
 
     const memory =
@@ -542,122 +533,96 @@ async function saveMemories() {
 
 
     if (!surpriseId) {
+
         alert("We couldn't find your surprise 😭");
         return;
+
     }
 
-
-    // Save the text memories first
-    const { error } = await bandhanSupabase
-        .from("surprises")
-        .update({
-            memory: memory,
-            inside: inside,
-            nickname: nickname
-        })
-        .eq("id", surpriseId);
-
-
-    if (error) {
-
-        console.error(error);
-
-        alert("Something went wrong saving your memories 😭");
-
-        return;
-    }
-
-
-    // Continue to the next page
-    window.location.href = "message.html";
-
-}
-
-</script>
-
-});
-
-
-async function saveMemories() {
-
-    const memory =
-        document.getElementById("memory").value.trim();
-
-    const inside =
-        document.getElementById("inside").value.trim();
-
-    const nickname =
-        document.getElementById("nickname").value.trim();
-
-    if (!surpriseId) {
-        alert("We couldn't find your surprise 😭");
-        return;
-    }
 
     // Save memories
-    const { error: updateError } = await bandhanSupabase
-        .from("surprises")
-        .update({
-            memory: memory,
-            inside: inside,
-            nickname: nickname
-        })
-        .eq("id", surpriseId);
+    const { error: updateError } =
+        await bandhanSupabase
+            .from("surprises")
+            .update({
+                memory: memory,
+                inside: inside,
+                nickname: nickname
+            })
+            .eq("id", surpriseId);
+
 
     if (updateError) {
+
         console.error(updateError);
+
         alert("Something went wrong saving your memories 😭");
+
         return;
+
     }
 
-   // Photo is OPTIONAL 📸
-const file =
-    document.getElementById("photoInput").files[0];
 
-console.log("PHOTO TEST:", file);
+    // 📸 PHOTO IS OPTIONAL
+    const file =
+        photoInput.files[0];
 
-// No photo? That's completely okay ❤️
-if (!file) {
-    window.location.href = "message.html";
-    return;
-}
 
-// Unique file name
-const fileName =
-    surpriseId + "/" + Date.now() + "-" + file.name;
+    // No photo? That's completely okay ❤️
+    if (!file) {
 
-console.log("STARTING UPLOAD:", fileName);
+        window.location.href = "message.html";
 
-// Upload photo
-const { error: uploadError } =
-    await bandhanSupabase.storage
-        .from("surprise-photos")
-        .upload(fileName, file);
+        return;
 
-console.log("UPLOAD RESULT:", uploadError);
+    }
 
-if (uploadError) {
-    console.error(uploadError);
-    alert("Something went wrong uploading your photo 😭");
-    return;
-}
+
+    // Create unique filename
+    const fileName =
+        surpriseId +
+        "/" +
+        Date.now() +
+        "-" +
+        file.name;
+
+
+    console.log("STARTING PHOTO UPLOAD:", fileName);
+
+
+    // Upload photo to Supabase Storage
+    const { error: uploadError } =
+        await bandhanSupabase.storage
+            .from("surprise-photos")
+            .upload(fileName, file);
+
+
+    console.log("UPLOAD RESULT:", uploadError);
+
 
     if (uploadError) {
+
         console.error(uploadError);
+
         alert("Something went wrong uploading your photo 😭");
+
         return;
+
     }
 
-    // Get public photo URL
+
+    // Get public URL
     const { data: publicUrlData } =
         bandhanSupabase.storage
             .from("surprise-photos")
             .getPublicUrl(fileName);
 
+
     const photoUrl =
         publicUrlData.publicUrl;
 
-    // Save photo URL to this surprise
+
+    // Save photo URL to the surprise
     const { error: photoError } =
         await bandhanSupabase
             .from("surprises")
@@ -666,16 +631,24 @@ if (uploadError) {
             })
             .eq("id", surpriseId);
 
+
     if (photoError) {
+
         console.error(photoError);
+
         alert("Your photo uploaded, but we couldn't save it 😭");
+
         return;
+
     }
 
+
+    // Continue
     window.location.href = "message.html";
+
 }
+
 </script>
 
 </body>
-
 </html>

@@ -520,11 +520,20 @@ async function loadPreview() {
 
 function startSurprise() {
 
+    const surpriseId =
+        localStorage.getItem("bandhanSurpriseId");
+
+    console.log("SURPRISE ID:", surpriseId);
+
+    if (!surpriseId) {
+        alert("We couldn't find your surprise 😭");
+        return;
+    }
+
     window.location.href =
-        "surprise.html";
+        "surprise.html?id=" + encodeURIComponent(surpriseId);
 
 }
-
 
 loadPreview();
 

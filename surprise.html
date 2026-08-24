@@ -130,87 +130,202 @@ h1 {
 }
 
 
-/* RAKHI */
+/* RAKHI EXPERIENCE */
+
+.rakhi-instruction {
+    color: #9b746d;
+    font-size: 14px;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
 
 .rakhi-area {
-    margin: 35px auto;
-    width: min(500px, 90vw);
-    height: 180px;
+    margin: 25px auto;
+    width: min(560px, 94vw);
+    height: 250px;
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+
+/* WRIST */
+
 .wrist {
-    width: 360px;
-    height: 90px;
-    background: #d9a06b;
-    border-radius: 50px;
+    width: 390px;
+    height: 105px;
+
+    background: linear-gradient(
+        to bottom,
+        #e2ad78,
+        #d49a64
+    );
+
+    border-radius: 60px;
+
     position: absolute;
+
     box-shadow:
-        inset 0 -10px 0 rgba(120,60,30,0.08),
-        0 15px 30px rgba(100,50,20,0.12);
+        inset 0 -12px 15px rgba(120,60,30,0.08),
+        0 18px 35px rgba(100,50,20,0.12);
 }
 
-.wrist::before {
-    content: "";
+.wrist-highlight {
     position: absolute;
-    left: 20px;
-    right: 20px;
-    top: 18px;
+    left: 35px;
+    right: 35px;
+    top: 20px;
     height: 8px;
-    background: rgba(255,255,255,0.18);
+
+    background: rgba(255,255,255,0.2);
+
     border-radius: 20px;
 }
 
 
-/* RAKHI PIECE */
+/* RAKHI */
 
 .rakhi-piece {
     position: absolute;
-    width: 90px;
-    height: 90px;
+
+    width: 96px;
+    height: 96px;
+
     border-radius: 50%;
-    background: #9f2d28;
-    border: 8px solid #d49342;
+
+    background:
+        radial-gradient(
+            circle,
+            #c4473d 0%,
+            #9f2d28 60%,
+            #79211e 100%
+        );
+
+    border: 7px solid #d49342;
+
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 38px;
+
     cursor: grab;
+
     touch-action: none;
     user-select: none;
+
     z-index: 5;
-    box-shadow: 0 10px 25px rgba(100,50,20,0.25);
+
+    box-shadow:
+        0 12px 25px rgba(100,50,20,0.25),
+        inset 0 0 0 3px rgba(255,255,255,0.12);
+
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.rakhi-piece:hover {
+    transform: scale(1.05);
 }
 
 .rakhi-piece:active {
     cursor: grabbing;
-    transform: scale(1.08);
+    transform: scale(1.1);
+}
+
+.rakhi-center {
+    font-size: 38px;
+}
+
+.rakhi-jewel {
+    position: absolute;
+
+    width: 16px;
+    height: 16px;
+
+    background: #f4d28b;
+
+    border-radius: 50%;
+
+    top: 8px;
+
+    box-shadow:
+        0 0 10px rgba(244,210,139,0.7);
 }
 
 
-/* THREAD */
+/* RAKHI THREAD */
 
-.thread {
+.rakhi-piece::before,
+.rakhi-piece::after {
+
+    content: "";
+
     position: absolute;
-    width: 320px;
-    height: 6px;
+
+    width: 90px;
+    height: 4px;
+
     background: #d49342;
-    border-radius: 10px;
-    pointer-events: none;
+
+    top: 50%;
+
+    z-index: -1;
+}
+
+.rakhi-piece::before {
+    right: 82px;
+}
+
+.rakhi-piece::after {
+    left: 82px;
 }
 
 
 /* SUCCESS */
 
-.success {
-    font-family: 'Playfair Display', serif;
-    color: #9f2d28;
-    font-size: 30px;
-    margin-top: 25px;
+.rakhi-success {
     display: none;
+    margin-top: 20px;
+    animation: successAppear 0.7s ease forwards;
+}
+
+.rakhi-success h2 {
+
+    font-family: 'Playfair Display', serif;
+
+    font-size: 32px;
+
+    color: #9f2d28;
+
+    margin-bottom: 6px;
+}
+
+.rakhi-success p {
+    color: #9b746d;
+}
+
+.success-symbol {
+    font-size: 42px;
+    margin-bottom: 5px;
+}
+
+@keyframes successAppear {
+
+    from {
+        opacity: 0;
+        transform:
+            translateY(15px)
+            scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform:
+            translateY(0)
+            scale(1);
+    }
+
 }
 
 
@@ -370,31 +485,54 @@ h1 {
         </h1>
 
         <p class="subtitle">
-            Drag the rakhi onto the wrist to tie it.
+            A Rakhi is more than a thread.
+            It's a little reminder of the bond you share.
         </p>
 
+        <div class="rakhi-instruction">
+            Drag the Rakhi onto the wrist ✨
+        </div>
 
         <div class="rakhi-area">
 
             <div class="thread"></div>
 
-            <div class="wrist"></div>
+            <div class="wrist">
+                <div class="wrist-highlight"></div>
+            </div>
 
             <div
                 class="rakhi-piece"
                 id="rakhiPiece"
             >
-                🪔
+
+                <div class="rakhi-center">
+                    🪔
+                </div>
+
+                <div class="rakhi-jewel"></div>
+
             </div>
 
         </div>
 
-
         <div
-            class="success"
+            class="rakhi-success"
             id="rakhiSuccess"
         >
-            Rakhi tied! ❤️
+
+            <div class="success-symbol">
+                🪔
+            </div>
+
+            <h2>
+                Rakhi tied! ❤️
+            </h2>
+
+            <p>
+                A small thread. A big bond.
+            </p>
+
         </div>
 
     </div>

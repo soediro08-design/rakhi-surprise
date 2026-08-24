@@ -610,25 +610,37 @@ async function saveMemories() {
         return;
     }
 
-    // Photo is OPTIONAL 📸
-    const file =
-        document.getElementById("photoInput").files[0];
+   // Photo is OPTIONAL 📸
+const file =
+    document.getElementById("photoInput").files[0];
 
-    // No photo? That's completely okay ❤️
-    if (!file) {
-        window.location.href = "message.html";
-        return;
-    }
+console.log("PHOTO TEST:", file);
 
-    // Unique file name
-    const fileName =
-        surpriseId + "/" + Date.now() + "-" + file.name;
+// No photo? That's completely okay ❤️
+if (!file) {
+    window.location.href = "message.html";
+    return;
+}
 
-    // Upload photo
-    const { error: uploadError } =
-        await bandhanSupabase.storage
-            .from("surprise-photos")
-            .upload(fileName, file);
+// Unique file name
+const fileName =
+    surpriseId + "/" + Date.now() + "-" + file.name;
+
+console.log("STARTING UPLOAD:", fileName);
+
+// Upload photo
+const { error: uploadError } =
+    await bandhanSupabase.storage
+        .from("surprise-photos")
+        .upload(fileName, file);
+
+console.log("UPLOAD RESULT:", uploadError);
+
+if (uploadError) {
+    console.error(uploadError);
+    alert("Something went wrong uploading your photo 😭");
+    return;
+}
 
     if (uploadError) {
         console.error(uploadError);

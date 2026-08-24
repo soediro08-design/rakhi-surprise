@@ -465,11 +465,17 @@ async function createSurprise() {
         message: message
     };
 
-    const { data, error } = await bandhanSupabase
+   const { error } = await bandhanSupabase
     .from("surprises")
-        .insert([surpriseData])
-        .select()
-        .single();
+    .insert([surpriseData]);
+
+if (error) {
+    console.error(error);
+    alert("Something went wrong saving your surprise 😭");
+    return;
+}
+
+window.location.href = "memories.html";
 
     if (error) {
         console.error(error);

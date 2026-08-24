@@ -409,14 +409,80 @@ textarea {
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <script>
-
 const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
-const SUPABASE_KEY = "sb_publishable_t_pgH9qwAvhMqP-39pyzDw_rTQqragU";
+const SUPABASE_KEY = "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
 
-const supabase = window.supabase.createClient(
+const bandhanSupabase = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
+
+let selectedVibe = "";
+
+function selectVibe(element) {
+    document.querySelectorAll(".vibe").forEach(function(vibe) {
+        vibe.classList.remove("selected");
+    });
+
+    element.classList.add("selected");
+    selectedVibe = element.innerText;
+}
+
+async function createSurprise() {
+
+    const recipient =
+        document.getElementById("recipient").value.trim();
+
+    const creator =
+        document.getElementById("creator").value.trim();
+
+    const message =
+        document.getElementById("message").value.trim();
+
+    if (recipient === "") {
+        alert("Tell us who the surprise is for 💌");
+        return;
+    }
+
+    if (creator === "") {
+        alert("Tell us your name 🪔");
+        return;
+    }
+
+    if (selectedVibe === "") {
+        alert("Choose a vibe ✨");
+        return;
+    }
+
+    if (message === "") {
+        alert("Add a little message 💕");
+        return;
+    }
+
+    const surpriseData = {
+        recipient: recipient,
+        creator: creator,
+        vibe: selectedVibe,
+        message: message
+    };
+
+    const { data, error } = await bandhanSupabase
+        .from("surprises")
+        .insert([surpriseData])
+        .select()
+        .single();
+
+    if (error) {
+        console.error(error);
+        alert("Something went wrong saving your surprise 😭");
+        return;
+    }
+
+    localStorage.setItem("bandhanSurpriseId", data.id);
+
+    window.location.href = "memories.html";
+}
+</script>
 
 let selectedVibe = "";
 

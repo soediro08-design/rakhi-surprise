@@ -336,9 +336,42 @@ transform: translate(-50%, -50%);
 .diya {
     font-size: 100px;
     margin: 30px auto;
+    display: inline-block;
+
     filter: drop-shadow(0 10px 20px rgba(159,45,40,0.15));
+
+    transition:
+        transform 0.25s ease,
+        filter 0.25s ease;
+
+    transform-origin: center bottom;
 }
 
+.diya.wishing {
+    transform: scale(1.18);
+
+    filter:
+        drop-shadow(0 0 18px rgba(255,180,60,0.8))
+        drop-shadow(0 10px 25px rgba(159,45,40,0.2));
+
+    animation: diyaGlow 0.9s ease-in-out infinite alternate;
+}
+
+@keyframes diyaGlow {
+
+    from {
+        filter:
+            drop-shadow(0 0 10px rgba(255,180,60,0.45))
+            drop-shadow(0 10px 20px rgba(159,45,40,0.15));
+    }
+
+    to {
+        filter:
+            drop-shadow(0 0 30px rgba(255,200,80,0.95))
+            drop-shadow(0 10px 25px rgba(159,45,40,0.2));
+    }
+
+}
 .hold-button {
     width: 220px;
     height: 70px;
@@ -870,8 +903,7 @@ let holdTimer;
 
 
 function startWish() {
-
-    diya.style.transform = "scale(1.25)";
+diya.classList.add("wishing");
 
     holdTimer =
         setTimeout(
@@ -901,9 +933,7 @@ function cancelWish() {
 
     clearTimeout(holdTimer);
 
-    diya.style.transform =
-        "scale(1)";
-
+   diya.classList.remove("wishing");
 }
 
 

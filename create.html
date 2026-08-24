@@ -475,11 +475,20 @@ async function createSurprise() {
 
 
     const { data, error } = await bandhanSupabase
-        .from("surprises")
-        .insert([surpriseData])
-        .select("id")
-        .single();
+    .from("surprises")
+    .insert([surpriseData]);
 
+console.log("INSERT RESULT:", { data, error });
+
+if (error) {
+    console.error("SUPABASE ERROR:", error);
+    alert("Something went wrong saving your surprise 😭");
+    return;
+}
+
+alert("SURPRISE SAVED 🎉");
+
+window.location.href = "memories.html";
 
     if (error) {
         console.error(error);

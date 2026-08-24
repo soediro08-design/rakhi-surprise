@@ -589,14 +589,13 @@ async function saveMemories() {
     const nickname =
         document.getElementById("nickname").value.trim();
 
-
     if (!surpriseId) {
         alert("We couldn't find your surprise 😭");
         return;
     }
 
-
-    const { error } = await bandhanSupabase
+    // Save memories
+    const { error: updateError } = await bandhanSupabase
         .from("surprises")
         .update({
             memory: memory,
@@ -605,38 +604,64 @@ async function saveMemories() {
         })
         .eq("id", surpriseId);
 
-
-    if (error) {
-        console.error(error);
+    if (updateError) {
+        console.error(updateError);
         alert("Something went wrong saving your memories 😭");
         return;
     }
 
+    // Photo is OPTIONAL 📸
+    const file =
+        document.getElementById("photoInput").files[0];
 
-    window.location.href = "message.html";
-
-}
-    const { error } = await bandhanSupabase
-        .from("surprises")
-        .update({
-            memory: memory,
-            inside: inside,
-            nickname: nickname
-        })
-        .eq("id", surpriseId);
-
-
-    if (error) {
-        console.error(error);
-        alert("Something went wrong saving your memories 😭");
+    // No photo? That's completely okay ❤️
+    if (!file) {
+        window.location.href = "message.html";
         return;
     }
 
+    // Unique file name
+    const fileName =
+        surpriseId + "/" + Date.now() + "-" + file.name;
+
+    // Upload photo
+    const { error: uploadError } =
+        await bandhanSupabase.storage
+            .from("surprise-photos")
+            .upload(fileName, file);
+
+    if (uploadError) {
+        console.error(uploadError);
+        alert("Something went wrong uploading your photo 😭");
+        return;
+    }
+
+    // Get public photo URL
+    const { data: publicUrlData } =
+        bandhanSupabase.storage
+            .from("surprise-photos")
+            .getPublicUrl(fileName);
+
+    const photoUrl =
+        publicUrlData.publicUrl;
+
+    // Save photo URL to this surprise
+    const { error: photoError } =
+        await bandhanSupabase
+            .from("surprises")
+            .update({
+                photo_url: photoUrl
+            })
+            .eq("id", surpriseId);
+
+    if (photoError) {
+        console.error(photoError);
+        alert("Your photo uploaded, but we couldn't save it 😭");
+        return;
+    }
 
     window.location.href = "message.html";
-
 }
-
 </script>
 
 </body>

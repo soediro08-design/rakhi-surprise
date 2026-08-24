@@ -860,38 +860,90 @@ h1 {
 
 </section>
 
-
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
 
-/* LOAD DATA */
+/* LOAD DATA FROM SUPABASE */
 
-const data =
-    JSON.parse(
-        localStorage.getItem("bandhanSurprise")
-    ) || {};
+const SUPABASE_URL =
+    "https://dttluzeymczbyfmilkzg.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
+
+const bandhanSupabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-const recipient =
-    data.recipient || "someone special";
+const params =
+    new URLSearchParams(window.location.search);
 
-const creator =
-    data.creator || "someone special";
+const surpriseId =
+    params.get("id");
 
 
-document.getElementById("recipientName").innerText =
-    recipient;
+async function loadSurprise() {
 
-document.getElementById("finalName").innerText =
-    recipient;
+    if (!surpriseId) {
 
-document.getElementById("letter").innerText =
-    data.message ||
-    "Happy Raksha Bandhan! ❤️";
+        alert("We couldn't find this surprise 😭");
+        return;
 
-document.getElementById("finalMessage").innerText =
-    "Made with love by " +
-    creator +
-    ". ❤️";
+    }
+
+
+    const { data, error } =
+        await bandhanSupabase
+            .from("surprises")
+            .select("*")
+            .eq("id", surpriseId)
+            .single();
+
+
+    console.log("SURPRISE DATA:", data);
+
+
+    if (error) {
+
+        console.error(error);
+
+        alert("We couldn't load your surprise 😭");
+        return;
+
+    }
+
+
+    const recipient =
+        data.recipient || "someone special";
+
+    const creator =
+        data.creator || "someone special";
+
+
+    document.getElementById("recipientName").innerText =
+        recipient;
+
+    document.getElementById("finalName").innerText =
+        recipient;
+
+
+    document.getElementById("letter").innerText =
+        data.message ||
+        "Happy Raksha Bandhan! ❤️";
+
+
+    document.getElementById("finalMessage").innerText =
+        "Made with love by " +
+        creator +
+        ". ❤️";
+
+}
+
+
+loadSurprise();
 
 
 /* SCREEN NAVIGATION */

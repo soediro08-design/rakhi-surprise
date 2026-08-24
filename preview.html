@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Preview Your Surprise | Bandhan 🪔</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8ef;
+    color: #54251f;
+    min-height: 100vh;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    background-image:
+        radial-gradient(circle at 20% 20%, #d99a55 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #b63b32 1px, transparent 1px);
+    background-size: 45px 45px;
+    z-index: -1;
+}
+
+nav {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #9f2d28;
+}
+
+.logo span {
+    color: #d49342;
+}
+
+.back {
+    text-decoration: none;
+    color: #9f2d28;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.progress {
+    width: 90%;
+    max-width: 720px;
+    margin: 10px auto 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.step {
+    display: flex;
+    align-items: center;
+    color: #c8a995;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.step.active {
+    color: #9f2d28;
+}
+
+.circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ead5bd;
+    margin-right: 7px;
+}
+
+.step.active .circle {
+    background: #9f2d28;
+    color: white;
+}
+
+.line {
+    width: 55px;
+    height: 1px;
+    background: #dfc4a5;
+    margin: 0 12px;
+}
+
+.container {
+    width: 90%;
+    max-width: 720px;
+    margin: 0 auto 100px;
+}
+
+.small-text {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12px;
+    color: #b36b31;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    text-align: center;
+    color: #8f2925;
+    font-size: clamp(42px, 7vw, 65px);
+    margin-bottom: 15px;
+}
+
+.subtitle {
+    text-align: center;
+    color: #76504a;
+    line-height: 1.7;
+    max-width: 540px;
+    margin: 0 auto 40px;
+}
+
+/* SURPRISE CARD */
+
+.surprise-card {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #ead5bd;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(100,50,20,0.08);
+    text-align: center;
+}
+
+.rakhi {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.greeting {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    color: #8f2925;
+    margin-bottom: 10px;
+}
+
+.made-by {
+    color: #9b746d;
+    margin-bottom: 30px;
+}
+
+.message-preview {
+    background: #fff8ef;
+    border: 1px solid #ead5bd;
+    border-radius: 20px;
+    padding: 25px;
+    text-align: left;
+    line-height: 1.8;
+    margin-bottom: 25px;
+    white-space: pre-line;
+}
+
+.memory-preview {
+    background: #fffaf4;
+    border-radius: 18px;
+    padding: 20px;
+    text-align: left;
+    margin-bottom: 12px;
+}
+
+.memory-title {
+    color: #8f2925;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.memory-text {
+    color: #76504a;
+    line-height: 1.6;
+}
+
+.vibe {
+    display: inline-block;
+    background: #fff1d3;
+    color: #8f2925;
+    padding: 9px 16px;
+    border-radius: 25px;
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.start-button {
+    display: block;
+    width: 100%;
+    border: none;
+    background: #9f2d28;
+    color: white;
+    padding: 18px;
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 30px;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(159,45,40,0.2);
+}
+
+.start-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(159,45,40,0.3);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+    <div class="logo">
+        Bandhan<span>🪔</span>
+    </div>
+
+    <a href="message.html" class="back">
+        ← Back
+    </a>
+
+</nav>
+
+
+<div class="progress">
+
+    <div class="step active">
+        <div class="circle">1</div>
+        Details
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        <div class="circle">2</div>
+        Memories
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        <div class="circle">3</div>
+        Message
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        <div class="circle">4</div>
+        Preview
+    </div>
+
+</div>
+
+
+<main class="container">
+
+    <div class="small-text">
+        Almost there
+    </div>
+
+    <h1>
+        Your surprise<br>is ready. 🪔
+    </h1>
+
+    <p class="subtitle">
+        Here's a little preview of what you've created.
+        Everything is made with love.
+    </p>
+
+
+    <div class="surprise-card">
+
+        <div class="rakhi">
+            🪔🧵
+        </div>
+
+        <div class="greeting" id="greeting">
+            A surprise for you
+        </div>
+
+        <div class="made-by" id="madeBy">
+            Made with love
+        </div>
+
+        <div class="vibe" id="vibe">
+            ✨ Your vibe
+        </div>
+
+
+        <div class="message-preview" id="messagePreview">
+        </div>
+
+
+        <div class="memory-preview" id="memoryBox">
+
+            <div class="memory-title">
+                💭 A favorite memory
+            </div>
+
+            <div class="memory-text" id="memoryPreview">
+            </div>
+
+        </div>
+
+
+        <div class="memory-preview" id="insideBox">
+
+            <div class="memory-title">
+                😂 Your little inside joke
+            </div>
+
+            <div class="memory-text" id="insidePreview">
+            </div>
+
+        </div>
+
+
+        <div class="memory-preview" id="nicknameBox">
+
+            <div class="memory-title">
+                🥰 Their nickname
+            </div>
+
+            <div class="memory-text" id="nicknamePreview">
+            </div>
+
+        </div>
+
+
+        <button
+            class="start-button"
+            onclick="startSurprise()"
+        >
+            Create the surprise ✨
+        </button>
+
+    </div>
+
+</main>
+
+
+<script>
+
+const data =
+    JSON.parse(
+        localStorage.getItem("bandhanSurprise")
+    ) || {};
+
+
+document.getElementById("greeting").innerText =
+    "A surprise for " +
+    (data.recipient || "someone special");
+
+
+document.getElementById("madeBy").innerText =
+    "Made with love by " +
+    (data.creator || "someone who cares");
+
+
+document.getElementById("vibe").innerText =
+    data.vibe || "✨ Your vibe";
+
+
+document.getElementById("messagePreview").innerText =
+    data.message || "Your message will appear here.";
+
+
+if (data.memory) {
+
+    document.getElementById("memoryPreview").innerText =
+        data.memory;
+
+} else {
+
+    document.getElementById("memoryBox").style.display =
+        "none";
+
+}
+
+
+if (data.inside) {
+
+    document.getElementById("insidePreview").innerText =
+        data.inside;
+
+} else {
+
+    document.getElementById("insideBox").style.display =
+        "none";
+
+}
+
+
+if (data.nickname) {
+
+    document.getElementById("nicknamePreview").innerText =
+        data.nickname;
+
+} else {
+
+    document.getElementById("nicknameBox").style.display =
+        "none";
+
+}
+
+
+function startSurprise() {
+
+    window.location.href =
+        "surprise.html";
+
+}
+
+</script>
+
+</body>
+
+</html>

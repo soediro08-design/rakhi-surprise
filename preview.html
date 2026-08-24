@@ -366,71 +366,155 @@ h1 {
 </main>
 
 
+```html
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
 
-const data =
-    JSON.parse(
-        localStorage.getItem("bandhanSurprise")
-    ) || {};
+const SUPABASE_URL =
+    "https://dttluzeymczbyfmilkzg.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
+
+const bandhanSupabase =
+    window.supabase.createClient(
+        SUPABASE_URL,
+        SUPABASE_KEY
+    );
 
 
-document.getElementById("greeting").innerText =
-    "A surprise for " +
-    (data.recipient || "someone special");
+// Get the surprise ID
+const surpriseId =
+    localStorage.getItem("bandhanSurpriseId");
 
 
-document.getElementById("madeBy").innerText =
-    "Made with love by " +
-    (data.creator || "someone who cares");
+async function loadPreview() {
+
+    if (!surpriseId) {
+
+        alert("We couldn't find your surprise 😭");
+
+        return;
+    }
 
 
-document.getElementById("vibe").innerText =
-    data.vibe || "✨ Your vibe";
+    // Get the surprise from Supabase
+    const { data, error } =
+        await bandhanSupabase
+            .from("surprises")
+            .select("*")
+            .eq("id", surpriseId)
+            .single();
 
 
-document.getElementById("messagePreview").innerText =
-    data.message || "Your message will appear here.";
+    if (error) {
+
+        console.error(error);
+
+        alert("We couldn't load your surprise 😭");
+
+        return;
+    }
 
 
-if (data.memory) {
+    // Basic information
+    document.getElementById("greeting").innerText =
+        "A surprise for " +
+        (data.recipient || "someone special");
 
-    document.getElementById("memoryPreview").innerText =
-        data.memory;
 
-} else {
+    document.getElementById("madeBy").innerText =
+        "Made with love by " +
+        (data.creator || "someone who cares");
 
-    document.getElementById("memoryBox").style.display =
-        "none";
+
+    document.getElementById("vibe").innerText =
+        data.vibe || "✨ Your vibe";
+
+
+    document.getElementById("messagePreview").innerText =
+        data.message || "Your message will appear here.";
+
+
+    // Favorite memory
+    if (data.memory) {
+
+        document.getElementById("memoryPreview").innerText =
+            data.memory;
+
+    } else {
+
+        document.getElementById("memoryBox").style.display =
+            "none";
+    }
+
+
+    // Inside joke
+    if (data.inside) {
+
+        document.getElementById("insidePreview").innerText =
+            data.inside;
+
+    } else {
+
+        document.getElementById("insideBox").style.display =
+            "none";
+    }
+
+
+    // Nickname
+    if (data.nickname) {
+
+        document.getElementById("nicknamePreview").innerText =
+            data.nickname;
+
+    } else {
+
+        document.getElementById("nicknameBox").style.display =
+            "none";
+    }
+
+
+    // PHOTO 📸
+    if (data.photo_url) {
+
+        const photoBox =
+            document.createElement("div");
+
+        photoBox.className =
+            "memory-preview";
+
+        photoBox.innerHTML = `
+            <div class="memory-title">
+                📸 A special memory
+            </div>
+
+            <img
+                src="${data.photo_url}"
+                alt="A special memory"
+                style="
+                    width:100%;
+                    max-height:400px;
+                    object-fit:cover;
+                    border-radius:16px;
+                    margin-top:10px;
+                "
+            >
+        `;
+
+        document
+            .querySelector(".surprise-card")
+            .insertBefore(
+                photoBox,
+                document.querySelector(".start-button")
+            );
+    }
 
 }
 
 
-if (data.inside) {
-
-    document.getElementById("insidePreview").innerText =
-        data.inside;
-
-} else {
-
-    document.getElementById("insideBox").style.display =
-        "none";
-
-}
-
-
-if (data.nickname) {
-
-    document.getElementById("nicknamePreview").innerText =
-        data.nickname;
-
-} else {
-
-    document.getElementById("nicknameBox").style.display =
-        "none";
-
-}
-
-
+// Create the surprise
 function startSurprise() {
 
     window.location.href =
@@ -438,7 +522,12 @@ function startSurprise() {
 
 }
 
+
+loadPreview();
+
 </script>
+```
+
 
 </body>
 

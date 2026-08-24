@@ -416,7 +416,6 @@ const bandhanSupabase = window.supabase.createClient(
     SUPABASE_URL,
     SUPABASE_KEY
 );
-
 let selectedVibe = "";
 
 function selectVibe(element) {
@@ -467,7 +466,7 @@ async function createSurprise() {
     };
 
     const { data, error } = await bandhanSupabase
-        .from("surprises")
+    .from("surprises")
         .insert([surpriseData])
         .select()
         .single();

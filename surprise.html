@@ -186,26 +186,26 @@ h1 {
 
 /* RAKHI */
 
+/* LUXURY RAKHI */
+
 .rakhi-piece {
     position: absolute;
-    left: 85%;
-    top: 50%;
-    transform: translate(-50%, -50%);
 
-    width: 96px;
-    height: 96px;
+    width: 105px;
+    height: 105px;
 
     border-radius: 50%;
 
     background:
         radial-gradient(
-            circle,
-            #c4473d 0%,
-            #9f2d28 60%,
-            #79211e 100%
+            circle at 35% 30%,
+            #d85a4d 0%,
+            #b6322c 35%,
+            #8f2421 70%,
+            #681917 100%
         );
 
-    border: 7px solid #d49342;
+    border: 5px solid #d49342;
 
     display: flex;
     align-items: center;
@@ -219,71 +219,184 @@ h1 {
     z-index: 5;
 
     box-shadow:
-        0 12px 25px rgba(100,50,20,0.25),
-        inset 0 0 0 3px rgba(255,255,255,0.12);
+        0 12px 28px rgba(100,50,20,0.25),
+        inset 0 0 0 3px rgba(255,255,255,0.12),
+        inset 0 0 0 8px rgba(212,147,66,0.18);
 
     transition:
-        transform 0.2s,
-        box-shadow 0.2s;
-}
-
-.rakhi-piece:hover {
-    transform: translate(-50%, -50%) scale(1.05);
-}
-
-.rakhi-piece:active {
-    cursor: grabbing;
-    transform: translate(-50%, -50%) scale(1.1);
-}
-
-.rakhi-center {
-    font-size: 38px;
-}
-
-.rakhi-jewel {
-    position: absolute;
-
-    width: 16px;
-    height: 16px;
-
-    background: #f4d28b;
-
-    border-radius: 50%;
-
-    top: 8px;
-
-    box-shadow:
-        0 0 10px rgba(244,210,139,0.7);
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
 
 
-/* RAKHI THREAD */
+/* GOLDEN INNER RING */
 
-.rakhi-piece::before,
 .rakhi-piece::after {
-
     content: "";
 
     position: absolute;
 
-    width: 90px;
-    height: 4px;
+    width: 78px;
+    height: 78px;
+
+    border-radius: 50%;
+
+    border: 2px solid rgba(244,210,139,0.8);
+
+    pointer-events: none;
+}
+
+
+/* THREAD */
+
+.rakhi-piece::before {
+    content: "";
+
+    position: absolute;
+
+    width: 250px;
+    height: 8px;
+
+    background:
+        repeating-linear-gradient(
+            90deg,
+            #9f2d28 0px,
+            #9f2d28 12px,
+            #d49342 12px,
+            #d49342 17px
+        );
+
+    border-radius: 20px;
+
+    z-index: -1;
+
+    box-shadow:
+        0 3px 6px rgba(100,50,20,0.15);
+}
+
+
+/* OM SYMBOL */
+
+.rakhi-center {
+    font-size: 43px;
+
+    color: #f4d28b;
+
+    z-index: 3;
+
+    text-shadow:
+        0 2px 5px rgba(80,30,15,0.35),
+        0 0 8px rgba(244,210,139,0.35);
+}
+
+
+/* LITTLE GOLD BEADS */
+
+.rakhi-jewel {
+    position: absolute;
+
+    width: 11px;
+    height: 11px;
+
+    background:
+        radial-gradient(
+            circle at 30% 30%,
+            #fff1b8,
+            #d49342 60%,
+            #a96825
+        );
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 7px rgba(244,210,139,0.7);
+
+    z-index: 4;
+}
+
+
+/* EXTRA DECORATIVE BEADS */
+
+.rakhi-piece .rakhi-jewel::before,
+.rakhi-piece .rakhi-jewel::after {
+    content: "";
+
+    position: absolute;
+
+    width: 8px;
+    height: 8px;
 
     background: #d49342;
 
-    top: 50%;
-
-    z-index: -1;
+    border-radius: 50%;
 }
 
-.rakhi-piece::before {
-    right: 82px;
+.rakhi-piece .rakhi-jewel::before {
+    left: -22px;
+    top: 1px;
 }
 
-.rakhi-piece::after {
-    left: 82px;
+.rakhi-piece .rakhi-jewel::after {
+    right: -22px;
+    top: 1px;
 }
 
+
+/* HOVER */
+
+.rakhi-piece:hover {
+    transform:
+        translate(-50%, -50%)
+        scale(1.06);
+
+    box-shadow:
+        0 16px 35px rgba(100,50,20,0.3),
+        0 0 18px rgba(212,147,66,0.25),
+        inset 0 0 0 3px rgba(255,255,255,0.15);
+}
+
+
+/* PICKING IT UP */
+
+.rakhi-piece:active {
+    cursor: grabbing;
+
+    transform:
+        translate(-50%, -50%)
+        scale(1.12);
+
+    box-shadow:
+        0 20px 40px rgba(100,50,20,0.3),
+        0 0 25px rgba(212,147,66,0.4);
+}
+.rakhi-piece.rakhi-tied {
+    animation: rakhiTied 0.7s ease;
+}
+
+@keyframes rakhiTied {
+
+    0% {
+        transform:
+            translate(-50%, -50%)
+            scale(1.15)
+            rotate(-5deg);
+    }
+
+    50% {
+        transform:
+            translate(-50%, -50%)
+            scale(0.92)
+            rotate(3deg);
+    }
+
+    100% {
+        transform:
+            translate(-50%, -50%)
+            scale(1)
+            rotate(0deg);
+    }
+
+}
 
 /* SUCCESS */
 
@@ -469,12 +582,25 @@ h1 {
         height: 90px;
     }
 
-    .rakhi-piece {
-        width: 82px;
-        height: 82px;
-        left: 88%;
-        top: 50%;
-    }
+.rakhi-piece {
+    width: 86px;
+    height: 86px;
+    left: 88%;
+    top: 50%;
+}
+
+.rakhi-center {
+    font-size: 34px;
+}
+
+.rakhi-piece::before {
+    width: 180px;
+}
+
+.rakhi-piece::after {
+    width: 64px;
+    height: 64px;
+}
 
     .rakhi-center {
         font-size: 32px;
@@ -905,6 +1031,7 @@ rakhi.addEventListener(
 
 
         if (insideWrist) {
+            rakhi.classList.add("rakhi-tied");
 
             rakhi.style.left =
                 (

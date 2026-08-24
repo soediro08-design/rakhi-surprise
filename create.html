@@ -406,7 +406,17 @@ textarea {
 </main>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_qbT7fBkRPSHkffZifCSUtg_j1ycyzES";
+
+const supabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
 
 let selectedVibe = "";
 
@@ -423,7 +433,7 @@ function selectVibe(element) {
 }
 
 
-function createSurprise() {
+async function createSurprise() {
 
     const recipient =
         document.getElementById("recipient").value.trim();
@@ -460,21 +470,29 @@ function createSurprise() {
 
 
     // Save the surprise details
-    const surpriseData = {
-        recipient: recipient,
-        creator: creator,
-        vibe: selectedVibe,
-        message: message
-    };
+const surpriseData = {
+    recipient: recipient,
+    creator: creator,
+    vibe: selectedVibe,
+    message: message
+};
 
-    localStorage.setItem(
-        "bandhanSurprise",
-        JSON.stringify(surpriseData)
-    );
+const { data, error } = await supabase
+    .from("surprises")
+    .insert([surpriseData])
+    .select()
+    .single();
 
+if (error) {
+    console.error(error);
+    alert("Something went wrong saving your surprise 😭");
+    return;
+}
 
-    // Go to the next step
-    window.location.href = "memories.html";
+localStorage.setItem("bandhanSurpriseId", data.id);
+
+// Go to the next step
+window.location.href = "memories.html";
 
 }
 </script>

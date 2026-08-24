@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rakhi Surprise 🪔</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Georgia, serif;
+            background: #fff7ed;
+            color: #54251f;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 650px;
+            padding: 50px 25px;
+        }
+
+        .emoji {
+            font-size: 55px;
+            margin-bottom: 15px;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin: 10px 0;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: normal;
+        }
+
+        p {
+            font-family: Arial, sans-serif;
+            font-size: 17px;
+            line-height: 1.7;
+        }
+
+        .card {
+            background: white;
+            padding: 35px;
+            border-radius: 25px;
+            box-shadow: 0 10px 35px rgba(84, 37, 31, 0.12);
+            margin-top: 30px;
+        }
+
+        button {
+            border: none;
+            background: #b33a2f;
+            color: white;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-size: 17px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .envelope {
+            font-size: 75px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .envelope:hover {
+            transform: scale(1.1) rotate(-3deg);
+        }
+
+        .message {
+            background: #fff1dc;
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 25px;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        .rakhi {
+            font-size: 100px;
+            margin: 20px;
+        }
+
+        .final {
+            font-size: 20px;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <!-- START SCREEN -->
+    <div id="start">
+        <div class="emoji">🪔</div>
+
+        <h1>Rakhi Surprise</h1>
+
+        <h2>A little surprise for someone special.</h2>
+
+        <div class="card">
+            <p>
+                Someone has prepared a little Raksha Bandhan surprise
+                just for you. ❤️
+            </p>
+
+            <p>
+                But you'll have to open it yourself...
+            </p>
+
+            <button onclick="startSurprise()">
+                Open your surprise 💌
+            </button>
+        </div>
+    </div>
+
+
+    <!-- OPEN WHEN SCREEN -->
+    <div id="openWhen" class="hidden">
+
+        <div class="emoji">💌</div>
+
+        <h1>Open when...</h1>
+
+        <p>
+            Pick an envelope.
+        </p>
+
+        <div class="card">
+
+            <div class="envelope" onclick="openMessage('badDay')">
+                💌
+                <p>you're having a bad day</p>
+            </div>
+
+            <div class="envelope" onclick="openMessage('laugh')">
+                😂
+                <p>you need to laugh</p>
+            </div>
+
+            <div class="envelope" onclick="openMessage('miss')">
+                🥹
+                <p>you miss me</p>
+            </div>
+
+            <div class="envelope" onclick="openMessage('rakhi')">
+                🪔
+                <p>it's Raksha Bandhan</p>
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- MESSAGE SCREEN -->
+    <div id="messageScreen" class="hidden">
+
+        <div class="emoji">💗</div>
+
+        <h1 id="messageTitle"></h1>
+
+        <div class="message">
+            <p id="messageText"></p>
+        </div>
+
+        <button onclick="backToEnvelopes()">
+            Back to envelopes 💌
+        </button>
+
+        <button onclick="showRakhi()">
+            There's one more thing... 🪔
+        </button>
+
+    </div>
+
+
+    <!-- RAKHI SCREEN -->
+    <div id="rakhiScreen" class="hidden">
+
+        <div class="emoji">🪔</div>
+
+        <h1>One last thing...</h1>
+
+        <p>
+            Every brother deserves a Rakhi.
+        </p>
+
+        <p>
+            So even though I can't physically tie one...
+        </p>
+
+        <button onclick="tieRakhi()">
+            Tie your Rakhi 🧿
+        </button>
+
+    </div>
+
+
+    <!-- FINAL SCREEN -->
+    <div id="finalScreen" class="hidden">
+
+        <div class="emoji">✨</div>
+
+        <h1>Rakhi tied!</h1>
+
+        <div class="rakhi">
+            🧿
+        </div>
+
+        <div class="final">
+
+            <p>
+                Happy Raksha Bandhan! 🪔❤️
+            </p>
+
+            <p>
+                We might not share the same parents,
+                but you're still someone I consider family.
+            </p>
+
+            <p>
+                No matter where life takes us,
+                you'll always be my brother. 🫶
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function hideAll() {
+    document.getElementById("start").classList.add("hidden");
+    document.getElementById("openWhen").classList.add("hidden");
+    document.getElementById("messageScreen").classList.add("hidden");
+    document.getElementById("rakhiScreen").classList.add("hidden");
+    document.getElementById("finalScreen").classList.add("hidden");
+}
+
+function startSurprise() {
+    hideAll();
+    document.getElementById("openWhen").classList.remove("hidden");
+}
+
+function openMessage(type) {
+
+    hideAll();
+
+    let title = "";
+    let message = "";
+
+    if (type === "badDay") {
+        title = "Having a bad day? 🥺";
+        message = "Just remember that somewhere out there is someone who thinks you're pretty awesome. So don't let one bad day convince you otherwise. ❤️";
+    }
+
+    if (type === "laugh") {
+        title = "You need to laugh 😂";
+        message = "Unfortunately I couldn't fit an entire comedy show into this website... so you'll have to laugh at my terrible jokes instead. 😭";
+    }
+
+    if (type === "miss") {
+        title = "You miss me? 🥹";
+        message = "Well... unfortunately I'm not magically appearing at your door. But consider this your little reminder that I'm always thinking about you. 🫶";
+    }
+
+    if (type === "rakhi") {
+        title = "Happy Raksha Bandhan! 🪔";
+        message = "Today is about celebrating the people who feel like family. And yes, that includes you. ❤️";
+    }
+
+    document.getElementById("messageTitle").innerText = title;
+    document.getElementById("messageText").innerText = message;
+
+    document.getElementById("messageScreen").classList.remove("hidden");
+}
+
+function backToEnvelopes() {
+    hideAll();
+    document.getElementById("openWhen").classList.remove("hidden");
+}
+
+function showRakhi() {
+    hideAll();
+    document.getElementById("rakhiScreen").classList.remove("hidden");
+}
+
+function tieRakhi() {
+
+    hideAll();
+
+    document.getElementById("finalScreen").classList.remove("hidden");
+
+    createConfetti();
+}
+
+function createConfetti() {
+
+    for (let i = 0; i < 80; i++) {
+
+        const confetti = document.createElement("div");
+
+        confetti.innerHTML = "✨";
+
+        confetti.style.position = "fixed";
+        confetti.style.left = Math.random() * 100 + "vw";
+        confetti.style.top = "-20px";
+        confetti.style.fontSize = (10 + Math.random() * 20) + "px";
+        confetti.style.transition = "transform 3s linear, top 3s linear";
+
+        document.body.appendChild(confetti);
+
+        setTimeout(() => {
+            confetti.style.top = "100vh";
+            confetti.style.transform =
+                "rotate(" + Math.random() * 720 + "deg)";
+        }, 50);
+
+        setTimeout(() => {
+            confetti.remove();
+        }, 3500);
+    }
+}
+
+</script>
+
+</body>
+</html>

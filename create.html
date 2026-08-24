@@ -436,56 +436,47 @@ function createSurprise() {
 
 
     if (recipient === "") {
-
         alert("Tell us who the surprise is for 💌");
-
         return;
-
     }
 
 
     if (creator === "") {
-
         alert("Tell us your name 🪔");
-
         return;
-
     }
 
 
     if (selectedVibe === "") {
-
         alert("Choose a vibe ✨");
-
         return;
-
     }
 
 
     if (message === "") {
-
         alert("Add a little message 💕");
-
         return;
-
     }
 
 
-    document.getElementById("successMessage").style.display = "block";
+    // Save the surprise details
+    const surpriseData = {
+        recipient: recipient,
+        creator: creator,
+        vibe: selectedVibe,
+        message: message
+    };
 
-    document.getElementById("successMessage").innerHTML =
-        "✨ Your surprise for " +
-        recipient +
-        " is coming to life...";
+    localStorage.setItem(
+        "bandhanSurprise",
+        JSON.stringify(surpriseData)
+    );
 
 
-    window.scrollTo({
-        top: document.body.scrollHeight,
-        behavior: "smooth"
-    });
+    // Go to the next step
+    window.location.href = "memories.html";
 
 }
-
 </script>
 
 

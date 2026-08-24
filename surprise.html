@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>A Little Surprise 🪔</title>
+
+<style>
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: #fff8ef;
+    color: #54251f;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    opacity: 0.25;
+    background-image:
+        radial-gradient(circle at 20% 20%, #d99a55 1px, transparent 1px),
+        radial-gradient(circle at 80% 70%, #b63b32 1px, transparent 1px);
+    background-size: 45px 45px;
+    z-index: -1;
+}
+
+
+/* NAV */
+
+nav {
+    padding: 22px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #9f2d28;
+}
+
+.logo span {
+    color: #d49342;
+}
+
+
+/* SCREENS */
+
+.screen {
+    min-height: calc(100vh - 80px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+.content {
+    width: 100%;
+    max-width: 700px;
+}
+
+
+/* TYPOGRAPHY */
+
+.small-text {
+    text-transform: uppercase;
+    letter-spacing: 4px;
+    font-size: 12px;
+    color: #b36b31;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+h1 {
+    font-family: 'Playfair Display', serif;
+    color: #8f2925;
+    font-size: clamp(44px, 8vw, 72px);
+    line-height: 1.05;
+    margin-bottom: 20px;
+}
+
+.subtitle {
+    color: #76504a;
+    line-height: 1.8;
+    max-width: 520px;
+    margin: 0 auto 35px;
+}
+
+
+/* BUTTON */
+
+.main-button {
+    border: none;
+    background: #9f2d28;
+    color: white;
+    padding: 17px 32px;
+    border-radius: 40px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0 10px 25px rgba(159,45,40,0.2);
+}
+
+.main-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(159,45,40,0.3);
+}
+
+
+/* RAKHI */
+
+.rakhi-area {
+    margin: 35px auto;
+    width: min(500px, 90vw);
+    height: 180px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wrist {
+    width: 360px;
+    height: 90px;
+    background: #d9a06b;
+    border-radius: 50px;
+    position: absolute;
+    box-shadow:
+        inset 0 -10px 0 rgba(120,60,30,0.08),
+        0 15px 30px rgba(100,50,20,0.12);
+}
+
+.wrist::before {
+    content: "";
+    position: absolute;
+    left: 20px;
+    right: 20px;
+    top: 18px;
+    height: 8px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 20px;
+}
+
+
+/* RAKHI PIECE */
+
+.rakhi-piece {
+    position: absolute;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: #9f2d28;
+    border: 8px solid #d49342;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 38px;
+    cursor: grab;
+    touch-action: none;
+    user-select: none;
+    z-index: 5;
+    box-shadow: 0 10px 25px rgba(100,50,20,0.25);
+}
+
+.rakhi-piece:active {
+    cursor: grabbing;
+    transform: scale(1.08);
+}
+
+
+/* THREAD */
+
+.thread {
+    position: absolute;
+    width: 320px;
+    height: 6px;
+    background: #d49342;
+    border-radius: 10px;
+    pointer-events: none;
+}
+
+
+/* SUCCESS */
+
+.success {
+    font-family: 'Playfair Display', serif;
+    color: #9f2d28;
+    font-size: 30px;
+    margin-top: 25px;
+    display: none;
+}
+
+
+/* DIYA */
+
+.diya {
+    font-size: 100px;
+    margin: 30px auto;
+    filter: drop-shadow(0 10px 20px rgba(159,45,40,0.15));
+}
+
+.hold-button {
+    width: 220px;
+    height: 70px;
+    border: none;
+    border-radius: 40px;
+    background: #9f2d28;
+    color: white;
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.hold-button:active {
+    transform: scale(0.96);
+}
+
+
+/* MESSAGE */
+
+.letter {
+    background: rgba(255,255,255,0.9);
+    border: 1px solid #ead5bd;
+    border-radius: 28px;
+    padding: 40px;
+    box-shadow: 0 20px 50px rgba(100,50,20,0.08);
+    text-align: left;
+    white-space: pre-line;
+    line-height: 1.9;
+    margin: 30px auto;
+    max-width: 650px;
+}
+
+
+/* FINAL */
+
+.final-rakhi {
+    font-size: 80px;
+    margin-bottom: 20px;
+}
+
+.final-name {
+    color: #9f2d28;
+}
+
+
+/* CONFETTI */
+
+.confetti {
+    position: fixed;
+    top: -20px;
+    font-size: 22px;
+    animation: fall 3s linear forwards;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes fall {
+
+    to {
+        transform:
+            translateY(110vh)
+            rotate(720deg);
+        opacity: 0;
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .wrist {
+        width: 290px;
+    }
+
+    .thread {
+        width: 260px;
+    }
+
+    .letter {
+        padding: 25px;
+    }
+
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<nav>
+
+    <div class="logo">
+        Bandhan<span>🪔</span>
+    </div>
+
+</nav>
+
+
+<!-- SCREEN 1 -->
+
+<section class="screen active" id="welcome">
+
+    <div class="content">
+
+        <div class="small-text">
+            A little surprise for
+        </div>
+
+        <h1 id="recipientName">
+            You
+        </h1>
+
+        <p class="subtitle">
+            Someone made something special just for you.
+            But first... there's a little tradition to complete. 🪔
+        </p>
+
+        <button
+            class="main-button"
+            onclick="showScreen('rakhi')"
+        >
+            Open your surprise ✨
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 2 -->
+
+<section class="screen" id="rakhi">
+
+    <div class="content">
+
+        <div class="small-text">
+            A little tradition
+        </div>
+
+        <h1>
+            Tie the Rakhi 🧵
+        </h1>
+
+        <p class="subtitle">
+            Drag the rakhi onto the wrist to tie it.
+        </p>
+
+
+        <div class="rakhi-area">
+
+            <div class="thread"></div>
+
+            <div class="wrist"></div>
+
+            <div
+                class="rakhi-piece"
+                id="rakhiPiece"
+            >
+                🪔
+            </div>
+
+        </div>
+
+
+        <div
+            class="success"
+            id="rakhiSuccess"
+        >
+            Rakhi tied! ❤️
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 3 -->
+
+<section class="screen" id="wish">
+
+    <div class="content">
+
+        <div class="small-text">
+            One little wish
+        </div>
+
+        <h1>
+            Make a wish. 🪔
+        </h1>
+
+        <p class="subtitle">
+            Hold the button and make a little wish.
+        </p>
+
+        <div class="diya" id="diya">
+            🪔
+        </div>
+
+        <button
+            class="hold-button"
+            id="holdButton"
+        >
+            Hold to make a wish
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 4 -->
+
+<section class="screen" id="message">
+
+    <div class="content">
+
+        <div class="small-text">
+            From the heart
+        </div>
+
+        <h1>
+            A message<br>for you. 💌
+        </h1>
+
+        <div
+            class="letter"
+            id="letter"
+        >
+        </div>
+
+        <button
+            class="main-button"
+            onclick="showScreen('final')"
+        >
+            One last thing ✨
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- SCREEN 5 -->
+
+<section class="screen" id="final">
+
+    <div class="content">
+
+        <div class="final-rakhi">
+            🪔❤️🪔
+        </div>
+
+        <div class="small-text">
+            Happy Raksha Bandhan
+        </div>
+
+        <h1>
+            <span class="final-name" id="finalName">
+                Shivan
+            </span>,
+            you're loved. ❤️
+        </h1>
+
+        <p class="subtitle" id="finalMessage">
+            Some bonds are simply special.
+        </p>
+
+        <button
+            class="main-button"
+            onclick="location.reload()"
+        >
+            Replay surprise ↻
+        </button>
+
+    </div>
+
+</section>
+
+
+<script>
+
+/* LOAD DATA */
+
+const data =
+    JSON.parse(
+        localStorage.getItem("bandhanSurprise")
+    ) || {};
+
+
+const recipient =
+    data.recipient || "someone special";
+
+const creator =
+    data.creator || "someone special";
+
+
+document.getElementById("recipientName").innerText =
+    recipient;
+
+document.getElementById("finalName").innerText =
+    recipient;
+
+document.getElementById("letter").innerText =
+    data.message ||
+    "Happy Raksha Bandhan! ❤️";
+
+document.getElementById("finalMessage").innerText =
+    "Made with love by " +
+    creator +
+    ". ❤️";
+
+
+/* SCREEN NAVIGATION */
+
+function showScreen(id) {
+
+    document.querySelectorAll(".screen")
+        .forEach(function(screen) {
+
+            screen.classList.remove("active");
+
+        });
+
+
+    document.getElementById(id)
+        .classList.add("active");
+
+
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+    });
+
+}
+
+
+/* RAKHI DRAGGING */
+
+const rakhi =
+    document.getElementById("rakhiPiece");
+
+const wrist =
+    document.querySelector(".wrist");
+
+let dragging = false;
+
+
+rakhi.addEventListener(
+    "pointerdown",
+    function(event) {
+
+        dragging = true;
+
+        rakhi.setPointerCapture(event.pointerId);
+
+    }
+);
+
+
+rakhi.addEventListener(
+    "pointermove",
+    function(event) {
+
+        if (!dragging) return;
+
+
+        const rect =
+            document.querySelector(".rakhi-area")
+            .getBoundingClientRect();
+
+
+        let x =
+            event.clientX -
+            rect.left -
+            rakhi.offsetWidth / 2;
+
+        let y =
+            event.clientY -
+            rect.top -
+            rakhi.offsetHeight / 2;
+
+
+        x = Math.max(
+            0,
+            Math.min(
+                x,
+                rect.width - rakhi.offsetWidth
+            )
+        );
+
+
+        y = Math.max(
+            0,
+            Math.min(
+                y,
+                rect.height - rakhi.offsetHeight
+            )
+        );
+
+
+        rakhi.style.left = x + "px";
+        rakhi.style.top = y + "px";
+
+    }
+);
+
+
+rakhi.addEventListener(
+    "pointerup",
+    function() {
+
+        if (!dragging) return;
+
+        dragging = false;
+
+
+        const rakhiRect =
+            rakhi.getBoundingClientRect();
+
+        const wristRect =
+            wrist.getBoundingClientRect();
+
+
+        const rakhiCenterX =
+            rakhiRect.left +
+            rakhiRect.width / 2;
+
+        const rakhiCenterY =
+            rakhiRect.top +
+            rakhiRect.height / 2;
+
+
+        const insideWrist =
+            rakhiCenterX >
+            wristRect.left &&
+            rakhiCenterX <
+            wristRect.right &&
+            rakhiCenterY >
+            wristRect.top &&
+            rakhiCenterY <
+            wristRect.bottom;
+
+
+        if (insideWrist) {
+
+            rakhi.style.left =
+                (
+                    wrist.offsetLeft +
+                    wrist.offsetWidth / 2 -
+                    rakhi.offsetWidth / 2
+                ) + "px";
+
+
+            rakhi.style.top =
+                (
+                    wrist.offsetTop +
+                    wrist.offsetHeight / 2 -
+                    rakhi.offsetHeight / 2
+                ) + "px";
+
+
+            rakhi.style.cursor = "default";
+
+
+            document.getElementById(
+                "rakhiSuccess"
+            ).style.display = "block";
+
+
+            celebrate();
+
+
+            setTimeout(
+                function() {
+
+                    showScreen("wish");
+
+                },
+                1800
+            );
+
+        }
+
+    }
+);
+
+
+/* WISH */
+
+const holdButton =
+    document.getElementById("holdButton");
+
+const diya =
+    document.getElementById("diya");
+
+let holdTimer;
+
+
+function startWish() {
+
+    diya.style.transform = "scale(1.25)";
+
+    holdTimer =
+        setTimeout(
+            function() {
+
+                diya.innerText = "🪔✨";
+
+                celebrate();
+
+                setTimeout(
+                    function() {
+
+                        showScreen("message");
+
+                    },
+                    1200
+                );
+
+            },
+            1800
+        );
+
+}
+
+
+function cancelWish() {
+
+    clearTimeout(holdTimer);
+
+    diya.style.transform =
+        "scale(1)";
+
+}
+
+
+holdButton.addEventListener(
+    "pointerdown",
+    startWish
+);
+
+holdButton.addEventListener(
+    "pointerup",
+    cancelWish
+);
+
+holdButton.addEventListener(
+    "pointerleave",
+    cancelWish
+);
+
+
+/* CONFETTI */
+
+function celebrate() {
+
+    const symbols = [
+        "🌸",
+        "✨",
+        "🪔",
+        "❤️",
+        "🌼"
+    ];
+
+
+    for (
+        let i = 0;
+        i < 30;
+        i++
+    ) {
+
+        const piece =
+            document.createElement("div");
+
+
+        piece.className =
+            "confetti";
+
+
+        piece.innerText =
+            symbols[
+                Math.floor(
+                    Math.random() *
+                    symbols.length
+                )
+            ];
+
+
+        piece.style.left =
+            Math.random() * 100 + "vw";
+
+
+        piece.style.animationDuration =
+            (2 + Math.random() * 2) + "s";
+
+
+        document.body.appendChild(piece);
+
+
+        setTimeout(
+            function() {
+
+                piece.remove();
+
+            },
+            4000
+        );
+
+    }
+
+}
+
+</script>
+
+</body>
+
+</html>

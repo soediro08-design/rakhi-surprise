@@ -474,9 +474,11 @@ async function createSurprise() {
     };
 
 
-    const { error } = await bandhanSupabase
+   const { data, error } = await bandhanSupabase
     .from("surprises")
-    .insert([surpriseData]);
+    .insert([surpriseData])
+    .select("id")
+    .single();
 
 if (error) {
     console.error(error);
@@ -485,34 +487,24 @@ if (error) {
 }
 
 
-// Find the surprise we just created
-const { data: savedSurprise, error: findError } =
-    await bandhanSupabase
-        .from("surprises")
-        .select("id")
-        .eq("recipient", recipient)
-        .eq("creator", creator)
-        .order("created_at", { ascending: false })
-        .limit(1)
-        .single();
+const { data, error } = await bandhanSupabase
+    .from("surprises")
+    .insert([surpriseData])
+    .select("id")
+    .single();
 
-
-if (findError) {
-    console.error(findError);
-    alert("Your surprise was saved, but we couldn't find it 😭");
+if (error) {
+    console.error(error);
+    alert("Something went wrong saving your surprise 😭");
     return;
 }
 
-
 localStorage.setItem(
     "bandhanSurpriseId",
-    savedSurprise.id
+    data.id
 );
 
-
 window.location.href = "memories.html";
-window.location.href = "memories.html";
-
     if (error) {
         console.error(error);
         alert("Something went wrong saving your surprise 😭");

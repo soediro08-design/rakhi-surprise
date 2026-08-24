@@ -321,7 +321,21 @@ I just want you to know..."
 </main>
 
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
 <script>
+
+const SUPABASE_URL = "https://dttluzeymczbyfmilkzg.supabase.co";
+const SUPABASE_KEY = "sb_publishable_cKY83kkqxg6CM9OtZCqgVg_x_KvdHbS";
+
+const bandhanSupabase = window.supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+);
+
+const surpriseId =
+    localStorage.getItem("bandhanSurpriseId");
+
 
 const messageBox =
     document.getElementById("message");
@@ -330,22 +344,7 @@ const count =
     document.getElementById("count");
 
 
-const existingData =
-    JSON.parse(
-        localStorage.getItem("bandhanSurprise")
-    ) || {};
-
-
-if (existingData.message) {
-
-    messageBox.value = existingData.message;
-
-    count.innerText =
-        existingData.message.length;
-
-}
-
-
+// Character counter
 messageBox.addEventListener("input", function() {
 
     count.innerText =
@@ -354,7 +353,8 @@ messageBox.addEventListener("input", function() {
 });
 
 
-function saveMessage() {
+// Save message
+async function saveMessage() {
 
     const message =
         messageBox.value.trim();
@@ -365,23 +365,33 @@ function saveMessage() {
         alert("Write a little message first 💕");
 
         return;
-
     }
 
 
-    const updatedData = {
+    if (!surpriseId) {
 
-        ...existingData,
+        alert("We couldn't find your surprise 😭");
 
-        message: message
+        return;
+    }
 
-    };
+
+    const { error } = await bandhanSupabase
+        .from("surprises")
+        .update({
+            message: message
+        })
+        .eq("id", surpriseId);
 
 
-    localStorage.setItem(
-        "bandhanSurprise",
-        JSON.stringify(updatedData)
-    );
+    if (error) {
+
+        console.error(error);
+
+        alert("Something went wrong saving your message 😭");
+
+        return;
+    }
 
 
     window.location.href = "preview.html";
@@ -389,7 +399,6 @@ function saveMessage() {
 }
 
 </script>
-
 </body>
 
 </html>

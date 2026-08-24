@@ -502,14 +502,11 @@ const bandhanSupabase = window.supabase.createClient(
 
 const surpriseId = localStorage.getItem("bandhanSurpriseId");
 
-
-const photoInput =
-    document.getElementById("photoInput");
-
-const photoPreview =
-    document.getElementById("photoPreview");
+const photoInput = document.getElementById("photoInput");
+const photoPreview = document.getElementById("photoPreview");
 
 
+// Show photo preview
 photoInput.addEventListener("change", function() {
 
     const file = this.files[0];
@@ -521,18 +518,17 @@ photoInput.addEventListener("change", function() {
         reader.onload = function(event) {
 
             photoPreview.src = event.target.result;
-
             photoPreview.style.display = "block";
 
         };
 
         reader.readAsDataURL(file);
-
     }
 
 });
 
 
+// Save memories
 async function saveMemories() {
 
     const memory =
@@ -551,6 +547,7 @@ async function saveMemories() {
     }
 
 
+    // Save the text memories first
     const { error } = await bandhanSupabase
         .from("surprises")
         .update({
@@ -562,12 +559,16 @@ async function saveMemories() {
 
 
     if (error) {
+
         console.error(error);
+
         alert("Something went wrong saving your memories 😭");
+
         return;
     }
 
 
+    // Continue to the next page
     window.location.href = "message.html";
 
 }

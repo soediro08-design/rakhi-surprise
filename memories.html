@@ -541,15 +541,20 @@ async function saveMemories() {
 
 
     // Save memories
-    const { error: updateError } =
-        await bandhanSupabase
-            .from("surprises")
-            .update({
-                memory: memory,
-                inside: inside,
-                nickname: nickname
-            })
-            .eq("id", surpriseId);
+   const { data: updatedSurprise, error: updateError } =
+    await bandhanSupabase
+        .from("surprises")
+        .update({
+            memory: memory,
+            inside: inside,
+            nickname: nickname
+        })
+        .eq("id", surpriseId)
+        .select()
+        .single();
+
+console.log("MEMORIES UPDATE RESULT:", updatedSurprise);
+console.log("MEMORIES UPDATE ERROR:", updateError);
 
 
     if (updateError) {

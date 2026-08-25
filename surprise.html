@@ -699,7 +699,51 @@ body.vibe-sweet .final-name {
 }
 
 body.vibe-traditional {
-    background: #fff4df;
+    background: #fff3dc;
+    transition: background 0.8s ease;
+}
+
+body.vibe-traditional::before {
+    opacity: 0.5;
+}
+
+body.vibe-traditional .small-text {
+    color: #a96825;
+}
+
+body.vibe-traditional h1 {
+    color: #8f2925;
+}
+
+body.vibe-traditional .letter {
+    border: 2px solid #d49342;
+    box-shadow:
+        0 20px 55px rgba(143,41,37,0.12),
+        0 0 0 5px rgba(212,147,66,0.08);
+}
+
+body.vibe-traditional .main-button {
+    background: #8f2925;
+    box-shadow:
+        0 10px 25px rgba(143,41,37,0.25);
+}
+
+body.vibe-traditional .final-rakhi {
+    animation: traditionalGlow 2.5s ease-in-out infinite;
+}
+
+@keyframes traditionalGlow {
+
+    0%, 100% {
+        transform: scale(1);
+        filter: drop-shadow(0 5px 10px rgba(212,147,66,0.1));
+    }
+
+    50% {
+        transform: scale(1.06);
+        filter: drop-shadow(0 0 18px rgba(212,147,66,0.45));
+    }
+
 }
 
 body.vibe-traditional h1,

@@ -1027,6 +1027,25 @@ const vibe =
     data.vibe || "✨ Sweet";
 
 console.log("SELECTED VIBE:", vibe);
+    // 🎨 APPLY VIBE STYLE
+
+if (vibe.includes("Funny")) {
+
+    document.body.classList.add("vibe-funny");
+
+} else if (vibe.includes("Emotional")) {
+
+    document.body.classList.add("vibe-emotional");
+
+} else if (vibe.includes("Sweet")) {
+
+    document.body.classList.add("vibe-sweet");
+
+} else if (vibe.includes("Traditional")) {
+
+    document.body.classList.add("vibe-traditional");
+
+}
 // 💭 OPTIONAL MEMORIES
 
 const memoryBox =

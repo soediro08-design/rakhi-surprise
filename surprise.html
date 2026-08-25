@@ -553,6 +553,37 @@ h1 {
 
 body.vibe-emotional {
     background: #fff5f5;
+    transition: background 0.8s ease;
+}
+
+body.vibe-emotional::before {
+    opacity: 0.35;
+}
+
+body.vibe-emotional .small-text {
+    color: #b35f65;
+}
+
+body.vibe-emotional h1 {
+    color: #8f2925;
+}
+
+body.vibe-emotional .letter {
+    box-shadow: 0 20px 60px rgba(159,45,40,0.12);
+}
+
+body.vibe-emotional .final-rakhi {
+    animation: emotionalFloat 3s ease-in-out infinite;
+}
+
+@keyframes emotionalFloat {
+    0%, 100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-8px);
+    }
 }
 
 body.vibe-emotional h1,

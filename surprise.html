@@ -1038,10 +1038,39 @@ if (data.nickname) {
 
 }
 
-    document.getElementById("finalMessage").innerText =
-        "Made with love by " +
-        creator +
-        ". ❤️";
+document.getElementById("finalMessage").innerText =
+    "Made with love by " +
+    creator +
+    ". ❤️";
+
+
+// ✨ VIBE DETAILS
+
+if (vibe.includes("Funny")) {
+
+    document.querySelector("#message h1").innerHTML =
+        "A message<br>for you. 😂";
+
+} else if (vibe.includes("Emotional")) {
+
+    document.querySelector("#message h1").innerHTML =
+        "From the heart<br>to yours. 🥹";
+
+} else if (vibe.includes("Traditional")) {
+
+    document.querySelector("#message h1").innerHTML =
+        "A bond<br>of tradition. 🪔";
+
+} else if (vibe.includes("Sweet")) {
+
+    document.querySelector("#message h1").innerHTML =
+        "A message<br>for you. 💕";
+
+} else if (vibe.includes("Playful")) {
+
+    document.querySelector("#message h1").innerHTML =
+        "Okayyy...<br>here we go! 😂";
+}
 
 }
 

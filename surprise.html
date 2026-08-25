@@ -653,9 +653,46 @@ body.vibe-funny .final-name {
 }
 
 body.vibe-sweet {
-    background: #fff8ef;
+    background: #fff7f4;
+    transition: background 0.8s ease;
 }
 
+body.vibe-sweet::before {
+    opacity: 0.3;
+}
+
+body.vibe-sweet .small-text {
+    color: #c87979;
+}
+
+body.vibe-sweet h1 {
+    color: #a8444a;
+}
+
+body.vibe-sweet .letter {
+    border-radius: 32px;
+    box-shadow: 0 20px 55px rgba(180,90,90,0.10);
+}
+
+body.vibe-sweet .main-button {
+    box-shadow: 0 10px 30px rgba(180,90,90,0.18);
+}
+
+body.vibe-sweet .final-rakhi {
+    animation: sweetFloat 3s ease-in-out infinite;
+}
+
+@keyframes sweetFloat {
+
+    0%, 100% {
+        transform: translateY(0) scale(1);
+    }
+
+    50% {
+        transform: translateY(-7px) scale(1.04);
+    }
+
+}
 body.vibe-sweet h1,
 body.vibe-sweet .final-name {
     color: #9f2d28;

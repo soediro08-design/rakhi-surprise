@@ -518,6 +518,27 @@ h1 {
     margin: 30px auto;
     max-width: 650px;
 }
+    /* 📸 PHOTO */
+
+.photo-preview {
+    background: #fffaf4;
+    border: 1px solid #ead5bd;
+    border-radius: 22px;
+    padding: 20px;
+    text-align: left;
+    margin: 15px auto;
+    max-width: 650px;
+}
+
+.photo-preview img {
+    display: block;
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 16px;
+    margin-top: 12px;
+    box-shadow: 0 10px 25px rgba(100,50,20,0.10);
+}
 .memory-preview {
     background: #fffaf4;
     border: 1px solid #ead5bd;
@@ -1025,13 +1046,45 @@ body.vibe-traditional .final-name {
             A message<br>for you. 💌
         </h1>
 
-        <div
-            class="letter"
-            id="letter"
-        >
-        </div>
-<div class="memory-preview" id="memoryBox">
+   <div
+    class="letter"
+    id="letter"
+>
+</div>
+<!-- 📸 SPECIAL MEMORY PHOTO -->
 
+<div class="photo-preview" id="photoBox">
+
+    <div class="memory-title">
+        📸 A special memory
+    </div>
+
+    <img
+        id="photoPreview"
+        src=""
+        alt="A special memory"
+    >
+
+</div>
+
+<!-- 📸 MEMORY PHOTO -->
+
+<div class="photo-preview" id="photoBox">
+
+    <div class="memory-title">
+        📸 A special memory
+    </div>
+
+    <img
+        id="photoPreview"
+        src=""
+        alt="A special memory"
+    >
+
+</div>
+
+
+<div class="memory-preview" id="memoryBox">
     <div class="memory-title">
         💭 A favorite memory
     </div>

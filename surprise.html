@@ -1238,6 +1238,25 @@ async function loadSurprise() {
     document.getElementById("letter").innerText =
         data.message ||
         "Happy Raksha Bandhan! ❤️";
+    // 📸 LOAD SPECIAL MEMORY PHOTO
+
+const photoBox =
+    document.getElementById("photoBox");
+
+const photoPreview =
+    document.getElementById("photoPreview");
+
+if (data.photo_url) {
+
+    photoPreview.src =
+        data.photo_url;
+
+} else {
+
+    photoBox.style.display =
+        "none";
+
+}
     // ✨ LOAD VIBE
 
 const vibe =
